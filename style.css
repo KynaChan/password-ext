@@ -1,0 +1,47 @@
+
+
+#myapp-body { 
+    width:400px;
+    padding-right: 5px;
+}
+
+.inputBox {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color:rgba(250,211,207,1);
+    box-shadow: 0.35rem 0.35rem 0.15rem rgba(247, 195, 189, 0.897);
+    color: rgba(228, 95, 80, 0.788);
+    margin: 20px;
+    padding: 10px;
+    font-size: 1rem;
+
+}
+
+.myapp-input {
+    margin: 0 0.5rem 0 0.5rem;
+    width: 100%;
+    border: none;
+    outline: none;
+    background: rgba(228, 95, 80, 0.39);
+    color: rgb(209, 54, 37);
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 7px;
+    border-radius: 10px;
+
+}
+
+.myapp-input:focus {
+    outline: solid 1px rgb(209, 54, 37);
+}
+
+::placeholder{
+    color: rgba(65, 25, 21, 0.781);
+    font-size: 1.2rem;
+}
+
+
+
