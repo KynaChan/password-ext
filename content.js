@@ -43,8 +43,20 @@ function checkBox() {
 function saveData() {
     const id = $("#myapp-userName").val();
     const pwd =  $("#myapp-password").val();
+
+    if (!id.length || !pwd.length) {
+        return;
+    }
+
     console.log(`The id is: ${id}`);
     console.log(`The password is: ${pwd}`);
+
+
+    tmpKey = window.location.href
+
+    data = window.localStorage.getItem(tmpKey) ? JSON.parse(window.localStorage.getItem(tmpKey)): {}
+    data[id] = pwd
+    window.localStorage.setItem(tmpKey, JSON.stringify(data));
 }
 
 

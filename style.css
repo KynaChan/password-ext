@@ -1,23 +1,31 @@
 
+* {
+    box-sizing: border-box;
+}
+
 
 #myapp-body { 
     width:400px;
     padding-right: 5px;
+    border: solid 1px black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .inputBox {
     display:flex;
     align-items: center;
     justify-content: space-between;
+    width: 90%;
     padding: 0.5rem;
     border-radius: 0.5rem;
     background-color:rgba(250,211,207,1);
     box-shadow: 0.35rem 0.35rem 0.15rem rgba(247, 195, 189, 0.897);
     color: rgba(228, 95, 80, 0.788);
-    margin: 20px;
+    margin: 10px;
     padding: 10px;
     font-size: 1rem;
-
 }
 
 .myapp-input {
@@ -38,10 +46,30 @@
     outline: solid 1px rgb(209, 54, 37);
 }
 
-::placeholder{
-    color: rgba(65, 25, 21, 0.781);
-    font-size: 1.2rem;
+.saveButton {
+    margin: 20px;
+    width: 100px;
+    justify-self: center;
+    border-radius: 15px;
+    background: rgba(250,211,207,1);
+    padding: 10px;
+    box-shadow: 0px 3px 1px rgba(240, 156, 146, 0.979);
+    border: none;
+    color: rgba(230, 64, 46, 0.979);
+    font-weight: bold;
+    font-size: 15px;
 }
 
+.saveButton:active {
+    box-shadow: none;
+    transform: translateY(2px);
+}
 
+.toggle-password {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding-left: 30px;
+    color:rgba(230, 64, 46, 0.979);
+}
 

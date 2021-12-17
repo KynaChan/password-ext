@@ -11,11 +11,11 @@
     
     <body id="myapp-body">
         <!--color:midnightblue-->
-        <!-- <div class="inputBox" style="font-size: 1.2rem" >
-            <div class="fa fa-search"></div>
-            <input id="searchApp" type="text" placeholder=" Application" onkeyup="searchApp"/>
+        <div class="inputBox" style="font-size: 1.2rem" >
+            <div class="fa fa-link"></div>
+            <input id="searchApp" type="text" class="myapp-input" onkeyup="searchApp"/>
             <div class="fa fa-times"></div>
-        </div> -->
+        </div>
 
         <div class="inputBox" >
             <div class="fa fa-user"></div>
@@ -26,11 +26,13 @@
         <div class="inputBox">        
             <div class="fa fa-lock"></div>
             <input id="myapp-password" class="myapp-input" type="password"/>
+        </div>
+
+        <div class="toggle-password">
             <b>Show Password</b>
             <input id="myappShowpwd" type="checkbox">
-        </div>      
-
+        </div>
         <button id="save-btn" class="saveButton">Save Data</button>
-
+    
     </body>
 </html>
