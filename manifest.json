@@ -22,7 +22,7 @@
             "matches":["<all_urls>"],
             "js":[
                 "content.js",
-                "jquery.js"
+                "libs/jquery.js"
             ],
 
             "css":["style.css"]

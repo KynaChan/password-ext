@@ -25,10 +25,42 @@ function enterInfo() {
 
 }
 
-function searchApp() {
-    const app = getElementById("searchApp");
-    let storedApp = [getElementById("inputApp")]
+function SelectUrl(url)
+{
+    $("#url-input").val(url);
+}
 
+function PopulateDropDown()
+{
+    $(".drop-down-row").remove();
+    let value = $("#url-input").val();
+    let dropDown = $(".drop-down");
+    for (var i=0; i < localStorage.length; i++)
+    {
+        let storeKey = localStorage.key(i);
+        if(i == 5) break;
+        if (value.length && !storeKey.startsWith(value)) continue;
+        dropDown.append(`<div class="drop-down-row" onmousedown="SelectUrl('${storeKey}')">${storeKey}</div>`);
+    } 
+
+    if(!dropDown.children().length) {
+        dropDown.append(`<div class="drop-down-row">No URLs found.</div>`);
+    }
+}
+
+function FocusUrlInput()
+{
+    $("#url-box").append(`<div class="drop-down"></div>`);
+    PopulateDropDown();
+}
+
+function BlurUrlInput()
+{
+    $(".drop-down").remove();
+}
+
+function updateUrlInput() { 
+    PopulateDropDown();
 }
 
 function checkBox() {
@@ -43,8 +75,9 @@ function checkBox() {
 function saveData() {
     const id = $("#myapp-userName").val();
     const pwd =  $("#myapp-password").val();
+    const tmpKey = $("#url-input").val();
 
-    if (!id.length || !pwd.length) {
+    if (!id.length || !pwd.length || !tmpKey) {
         return;
     }
 
@@ -52,7 +85,7 @@ function saveData() {
     console.log(`The password is: ${pwd}`);
 
 
-    tmpKey = window.location.href
+    
 
     data = window.localStorage.getItem(tmpKey) ? JSON.parse(window.localStorage.getItem(tmpKey)): {}
     data[id] = pwd

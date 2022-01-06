@@ -3,17 +3,25 @@
     box-sizing: border-box;
 }
 
+#myapp-body ::placeholder {
+    color: rgb(209, 54, 37);
+    opacity: .4;
+    font-weight: normal;
+}
 
 #myapp-body { 
     width:400px;
     padding-right: 5px;
-    border: solid 1px black;
+    border: solid 1px rgba(228, 95, 80, 0.788);
+    background-color: rgba(255, 228, 226, 0.788);
     display: flex;
     flex-direction: column;
     align-items: center;
+    border-radius: 15px;
 }
 
 .inputBox {
+    position: relative;
     display:flex;
     align-items: center;
     justify-content: space-between;
@@ -71,5 +79,46 @@
     width: 100%;
     padding-left: 30px;
     color:rgba(230, 64, 46, 0.979);
+    user-select: none;
 }
 
+.drop-down {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    top: 100%;
+    z-index: 99;
+    left: 0;
+    width: 100%;
+    background: rgb(255, 168, 159);
+    border: solid 1px rgba(228, 95, 80, 0.788);
+    border-radius: 10px;
+    height: fit-content;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.459);
+    padding: 5px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.drop-down-row {
+    color: white;
+    background: rgba(228, 95, 80, 0.527);
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.drop-down-row:hover {
+    background: rgba(228, 95, 80, 0.178);
+}
+
+
+.empty-url {
+    cursor: pointer;
+}
+
+.empty-url:hover {
+    opacity: .6;
+}
