@@ -3,22 +3,36 @@
     box-sizing: border-box;
 }
 
+
+
 #myapp-body ::placeholder {
     color: rgb(209, 54, 37);
     opacity: .4;
     font-weight: normal;
 }
 
+
 #myapp-body { 
     width:400px;
+    height: fit-content;
     padding-right: 5px;
-    border: solid 1px rgba(228, 95, 80, 0.788);
-    background-color: rgba(255, 228, 226, 0.788);
+    border: solid 6px rgba(197, 84, 71, 0.945);
+    border-radius: 10px;
+    background-color: rgba(248, 239, 238, 0.938);
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 15px;
+    margin: 0;
 }
+
+
+.headerBox{
+    font-weight: bold;
+    text-align:center;
+    user-select: none;
+
+}
+
 
 .inputBox {
     position: relative;
@@ -33,8 +47,10 @@
     color: rgba(228, 95, 80, 0.788);
     margin: 10px;
     padding: 10px;
-    font-size: 1rem;
+    font-size: 1.3rem;
 }
+
+
 
 .myapp-input {
     margin: 0 0.5rem 0 0.5rem;
@@ -50,8 +66,10 @@
 
 }
 
-.myapp-input:focus {
-    outline: solid 1px rgb(209, 54, 37);
+.myapp-input:hover, .myapp-input:focus {
+    border: none;
+    transition: all .5s linear;
+    box-shadow: inset 0px 0px 10px  rgba(226, 59, 41, 0.616);
 }
 
 .saveButton {
@@ -71,15 +89,6 @@
 .saveButton:active {
     box-shadow: none;
     transform: translateY(2px);
-}
-
-.toggle-password {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    padding-left: 30px;
-    color:rgba(230, 64, 46, 0.979);
-    user-select: none;
 }
 
 .drop-down {
@@ -108,6 +117,7 @@
     padding: 5px;
     cursor: pointer;
     user-select: none;
+    overflow-wrap: break-word;
 }
 
 .drop-down-row:hover {
@@ -115,10 +125,63 @@
 }
 
 
-.empty-url {
+.empty-url, .settingDot, #myappShowpwd{
     cursor: pointer;
 }
 
-.empty-url:hover {
+.empty-url:hover, .settingDot:hover, #myappShowpwd:hover{
     opacity: .6;
 }
+
+.empty-url:active, .settingDot:active, #myappShowpwd:active{
+    transform: scaleY(0.9) scaleX(1.75) translateY(3px);
+}
+
+
+
+
+.pwStrength{
+    position: relative;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+    color: rgba(197, 84, 71, 0.945);
+    font-size: 15px;
+    margin-left: 50px;
+    padding: 5px;
+}
+
+meter {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+  
+    width: 87%;
+    height: 20px;
+    border-radius: 8.5px;
+    font-family: cursive; 
+    text-align: center;
+    color: rgb(200, 92, 80);
+  
+    /* Firefox */
+    background: none;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+  
+meter::-webkit-meter-bar {
+    background: none;
+    background-color: rgba(0,0,0,0.1);
+}
+
+meter[value="1"]::-webkit-meter-optimum-value { background: rgba(255, 0, 0, 0.795); }
+meter[value="2"]::-webkit-meter-optimum-value { background: rgba(255, 255, 0, 0.795); }
+meter[value="3"]::-webkit-meter-optimum-value { background: rgba(255, 166, 0, 0.795); }
+meter[value="4"]::-webkit-meter-optimum-value { background: rgba(0, 128, 0, 0.795); }
+
+
+#strengthText {
+    color: rgba(200, 92, 80, 0.719);
+    font-family: cursive;
+    margin-left: 8px;
+}
+

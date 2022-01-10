@@ -4,14 +4,14 @@
     "version": "1.0.0",
     "description": "Save time by managing your accounts and passwords here!",
     "browser_action" : {
-        "default_icon" : "icon/images.png",
+        "default_icon" : "icon/image3.png",
         "default_popup": "popup.html"
     },
     "icons": {
-        "16": "icon/images.png",
-        "32": "icon/images.png",
-        "48": "icon/images.png",
-        "128":"icon/images.png"
+        "16": "icon/image3.png",
+        "32": "icon/image3.png",
+        "48": "icon/image3.png",
+        "128":"icon/image3.png"
        },
        "permissions":[
            "activeTab",

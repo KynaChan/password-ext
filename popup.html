@@ -11,18 +11,19 @@
     
     <body id="myapp-body">
         <!--color:midnightblue-->
-        <div class="inputBox" id="url-box" style="font-size: 1.2rem" >
+        <div class="inputBox headerBox" style="color: rgb(245, 78, 60);">
+            PW Manager
+            <div class="fa fa-ellipsis-h settingDot"></div>
+        </div>
+        <div class="inputBox" id="url-box"  >
             <div class="fa fa-link"></div>
             <input 
                 placeholder="URL..."
                 id="url-input" 
                 type="text" 
                 class="myapp-input" 
-                onfocus="FocusUrlInput()" 
-                onblur="BlurUrlInput()"
-                oninput="updateUrlInput()"
             />
-            <div onclick="SelectUrl('')" class="fa fa-times empty-url"></div>
+            <div class="fa fa-times empty-url"></div>
         </div>
 
         <div class="inputBox" >
@@ -34,13 +35,33 @@
         <div class="inputBox">
             <div class="fa fa-lock"></div>
             <input  placeholder="Password..." id="myapp-password" class="myapp-input" type="password"/>
+            <div class="fa fa-eye" id="myappShowpwd"></div>
         </div>
 
-        <div class="toggle-password">
-            <label for="myappShowpwd" style="font-weight: bold; cursor: pointer;">Show Password</label>
-            <input id="myappShowpwd" name="show-pass" type="checkbox">
+        <div class="pwStrength">
+            <meter max="4" id="strength-bar">Password Strength</meter>
+            <b id="strengthText">strengthText</b>
         </div>
+        
         <button id="save-btn" class="saveButton">Save Data</button>
     
     </body>
 </html>
+
+
+<!--
+All projects must demonstrate the following:
+• An index HTML page
+• JSON output to local storage
+• JSON input from local storage
+• A single page application showing some form of interactivity
+The JSON output will be as follows:
+{
+"Username" : "Shirley",
+"Application" : "Snap!",
+"PlayMins" : 23,
+"Score" : 3,
+"Level" : 1
+}
+-->
+

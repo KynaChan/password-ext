@@ -1,29 +1,5 @@
-// let aImages = [
-//     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpcW3nJ45ZbicwN7GQ4i6cI_zMJC8z8GvpYA&usqp=CAU",
-//     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQweWtu7Gk6-Q-vTW_k-jdphcekOi0aXKfkbQ&usqp=CAU"
-// ];
-
-// const img = document.getElementsByTagName("img");
-// for(let i = 0; i<img.length;i++){
-//     const random = Math.floor(Math.random()*aImages.length);
-//     img[i].src = aImages[random];
-// }
-
-function saveIn(){
-    let text;
-    let userName = window.prompt("User name: ");
-    if (userName != null || userName != "") 
-        text = "Hello " + userName + "! Is that your name?";
-    let userPassword = window.prompt("Password: ");
-    if (userPassword != null || userPassword != "") 
-        text = "Hello " + userPassword + "! Is that your password?";
-    document.getElementById("output").innerHTML = text; 
-}
 
 
-function enterInfo() {
-
-}
 
 function SelectUrl(url)
 {
@@ -38,9 +14,10 @@ function PopulateDropDown()
     for (var i=0; i < localStorage.length; i++)
     {
         let storeKey = localStorage.key(i);
-        if(i == 5) break;
+        //if(i == 5) break;
         if (value.length && !storeKey.startsWith(value)) continue;
-        dropDown.append(`<div class="drop-down-row" onmousedown="SelectUrl('${storeKey}')">${storeKey}</div>`);
+        dropDown.append(`<div class="drop-down-row" id="d-row-${i}">${storeKey}</div>`);
+        $(`#d-row-${i}`).mousedown(() => SelectUrl(storeKey));
     } 
 
     if(!dropDown.children().length) {
@@ -63,41 +40,59 @@ function updateUrlInput() {
     PopulateDropDown();
 }
 
-function checkBox() {
-    if (this.checked) {
+function pwdToggle() {
+    $("#myappShowpwd").mousedown(function(){
         $("#myapp-password").attr('type', "text");
-    } else {
+    });    
+    $("#myappShowpwd").mouseup(function(){
         $("#myapp-password").attr('type', "password");
-    }
+    });
+        
+}
 
+let strengthText = {
+    0: "Worst",
+    1: "Bad",
+    2: "Weak",
+    3: "Good",
+    4: "Strong"
 }
 
 function saveData() {
-    const id = $("#myapp-userName").val();
+    const user = $("#myapp-userName").val();
     const pwd =  $("#myapp-password").val();
-    const tmpKey = $("#url-input").val();
+    const urlInput = $("#url-input").val();
 
-    if (!id.length || !pwd.length || !tmpKey) {
-        return;
-    }
+    if (!urlInput.length) return alert("Enter a website.");
+    if(!user.length) return alert("Enter an email or username.");
+    if(pwd.length<8) return alert("Use 8 or more characters with a mix of letters, numbers & symbols.");
+    else if(!/[0-9]+/.test(pwd)) return $("#pw-feedback").text("Strength: " + strengthText)
+    else if(! /[A-Z]+/.test(pwd)) return console.log("NEED CAPs");
+    else if(!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(pwd)) return console.log("nee& $ymbo!");
 
-    console.log(`The id is: ${id}`);
+
+    //if (!id.length || !pwd.length || !urlInput) return;
+
+    console.log(`The website is: ${urlInput}`);
+    console.log(`The userName is: ${user}`);
     console.log(`The password is: ${pwd}`);
 
 
-    
-
-    data = window.localStorage.getItem(tmpKey) ? JSON.parse(window.localStorage.getItem(tmpKey)): {}
-    data[id] = pwd
-    window.localStorage.setItem(tmpKey, JSON.stringify(data));
+    data = window.localStorage.getItem(urlInput) ? JSON.parse(window.localStorage.getItem(urlInput)): {}
+    data[user] = pwd
+    window.localStorage.setItem(urlInput, JSON.stringify(data));
+    $("#myapp-userName").val("");
+    $("#myapp-password").val("");
 }
-
 
 $( document ).ready(function() {
 
-    $("#myappShowpwd").click(checkBox);
+    $("#myappShowpwd").click(pwdToggle);
     $("#save-btn").click(saveData);
-
+    $(".empty-url").click(() => SelectUrl(''));
+    $("#url-input").focus(FocusUrlInput);
+    $("#url-input").blur(BlurUrlInput);
+    $("#url-input").on('input', updateUrlInput);
 });
   
 
@@ -106,3 +101,27 @@ $( document ).ready(function() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+function example() {
+    const pwd = document.getElementById($('#myapp-password'));
+    const meter = document.getElementById($('#strength-bar'));
+    const text = document.getElementById($('#pw-strength-text'));
+
+    this.pwd.addEventListener('input', function(){
+        const val = pwd.val;
+        const result = "zxcvbn(val);";
+
+        meter.val = result.score;
+        if(val) text.innerHTML = "Strength: " + strengthText[result.score] + "<span class='feedback'>" + result.feedback.warning + " " + result.feedback.suggestions + "</span"; 
+        else {text.innerHTML = "";}
+    });
+}
