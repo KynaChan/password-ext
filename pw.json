@@ -1,6 +1,17 @@
-{
-    "Application": "url",
-    "UserName": "Bob",
-    "Password": "BBBob13"
 
-}
+[   
+    {
+        "Application": "url",
+        "UserName": "Bob",
+        "Password": "BBBob13",
+        "id": 0
+
+    },
+    
+    {
+        "Application": "url",
+        "UserName": "Bob",
+        "Password": "BBBob13",
+        "id": 0
+    }
+]

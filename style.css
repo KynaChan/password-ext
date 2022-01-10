@@ -179,9 +179,12 @@ meter[value="3"]::-webkit-meter-optimum-value { background: rgba(255, 166, 0, 0.
 meter[value="4"]::-webkit-meter-optimum-value { background: rgba(0, 128, 0, 0.795); }
 
 
-#strengthText {
+.pwd-feedback {
     color: rgba(200, 92, 80, 0.719);
+    width: 100%;
     font-family: cursive;
-    margin-left: 8px;
+    padding: 5px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
