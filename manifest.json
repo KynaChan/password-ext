@@ -1,11 +1,11 @@
 {
     "manifest_version":2 ,
-    "name": "PW manager",
+    "name": "CatLocker",
     "version": "1.0.0",
-    "description": "Save time by managing your accounts and passwords here!",
+    "description": "Your personal account management system, password tester and generator. Here in CatLocker! ",
     "browser_action" : {
         "default_icon" : "icon/image3.png",
-        "default_popup": "popup.html"
+        "default_popup": "index.html"
     },
     "icons": {
         "16": "icon/image3.png",

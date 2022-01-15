@@ -48,33 +48,67 @@ function pwdToggle() {
 }
 
 let strengthText = {
-    0: "Worst",
     1: "Bad",
     2: "Weak",
     3: "Good",
-    4: "Strong"
+    4: "Strong",
+    5: "Everything is great, good to go!"
+}
+
+const textList = [ "Use 8 or more characters with a mix of letters, numbers & symbols.",
+                    "Try not to using repeating characters.",
+                    "Maybe with CAPITAL letters.",
+                    "Maybe with numbers.",
+                    "Maybe with symbols."
+                    ];
+
+function getPasswordScore(pwd)
+{
+    let strength = 0;
+    
+    if (pwd.length < 8) return strength = 1;
+    else{   strength++;
+        delete(textList[1]);
+    }
+    
+    
+    let chFound = 0;
+    for (let i = 0; i < pwd.length; i++) 
+    {
+        if (pwd[i].match(pwd[i+1]) && 
+            !pwd[i].match(pwd[i+2]))
+        {chFound++;}
+    }
+    if(chFound < 2) 
+    { textList.remove(textList[1]);
+    strength++;}
+    
+    if (pwd.match(/[A-Z]+/)) 
+    strength++;
+
+    if (pwd.match(/[0-9]+/))
+    strength++;
+
+    if (pwd.match(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/)) 
+    strength++;
+
+    $("#pwd-feedback").text(textList);
+    return strength;
 }
 
 function UpdateStrengthFeedback()
 {
     let pwd = $("#myapp-password").val();
-    let text = "";
-    if(pwd.length < 8)
-    {
-        text = `Strength: ${strengthText[0]}. \n Use 8 or more characters with a mix of letters, numbers & symbols.`;
-    }
-    
-    else if(!/[0-9]+/.test(pwd)) 
-        return $("#pwd-feedback").text("Strength: " + strengthText[1] + ", maybe with numbers.");
-    else if(! /[A-Z]+/.test(pwd)) 
-        return $("#pwd-feedback").text("Strength: " + strengthText[2] + ", maybe with CAPITAL letters.");
-    else if(!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(pwd)) 
-        return $("#pwd-feedback").text("Strength: " + strengthText[3] + ", maybe with symbols.");
-    else 
-        return $("#pwd-feedback").text("Strength: "+strengthText[4]+"!"); 
+    let strength = getPasswordScore(pwd);
 
-    $("#pwd-feedback").text(text);
+    console.log(strength);
+    $("#strength-bar").attr("value", strength);
+    //$("#pwd-feedback").text(strengthText[strength]);
+
 }
+
+
+
 
 function updatePwdInput()
 {
@@ -102,47 +136,41 @@ function saveData() {
     $("#myapp-password").val("");
 }
 
+function load(page, load) {
+    $("body").load(`${page}.html`, load)
+}
 
 /*
-///////////EXAMPLE
-fetch("./employees.json")
-.then(response => {
-   return response.json();
-})
-.then(data => console.log(data));
-
-
-///////////EXAMPLE
-var fs = require('fs');
-var data = {}
-data.table = []
-for (i=0; i <26 ; i++){
-   var obj = {
-       id: i,
-       square: i * i
-   }
-   data.table.push(obj)
-}
-fs.writeFile ("input.json", JSON.stringify(data), function(err) {
-    if (err) throw err;
-    console.log('complete');
-    }
-);
+setItem and getItem from the localStorage
 */
 
 
-
-
+$.ajaxSetup({
+    cache: false
+});
 $( document ).ready(function() {
+    load("popup", () => {
+        $("#myappShowpwd").click(pwdToggle);
+        $("#save-btn").click(saveData);
+        $(".empty-url").click(() => SelectUrl(''));
+        $("#url-input").focus(FocusUrlInput);
+        $("#url-input").blur(BlurUrlInput);
+        $("#url-input").on('input', updateUrlInput);
+        $("#myapp-password").on('input', updatePwdInput);
+        $(".seTTing").click(() => {
+            load("dashboard", () => {
+                $(".seTTing").click(() =>{load("popup")});
 
-    $("#myappShowpwd").click(pwdToggle);
-    $("#save-btn").click(saveData);
-    $(".empty-url").click(() => SelectUrl(''));
-    $("#url-input").focus(FocusUrlInput);
-    $("#url-input").blur(BlurUrlInput);
-    $("#url-input").on('input', updateUrlInput);
-    $("#myapp-password").on('input', updatePwdInput);
+            });
+
+        });
+    });
+
     
+
+
+
+
 });
 
 

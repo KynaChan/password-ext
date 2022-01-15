@@ -4,7 +4,6 @@
 }
 
 
-
 #myapp-body ::placeholder {
     color: rgb(209, 54, 37);
     opacity: .4;
@@ -48,8 +47,15 @@
     margin: 10px;
     padding: 10px;
     font-size: 1.3rem;
+    
 }
 
+.passwordBox {
+    position: relative;
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+}
 
 
 .myapp-input {
@@ -125,15 +131,16 @@
 }
 
 
-.empty-url, .settingDot, #myappShowpwd{
+.empty-url, .seTTing, #myappShowpwd, .toIndex{
     cursor: pointer;
+    opacity: .5;
 }
 
-.empty-url:hover, .settingDot:hover, #myappShowpwd:hover{
-    opacity: .6;
+.empty-url:hover, .seTTing:hover, #myappShowpwd:hover, .toIndex:hover{
+    opacity: 1;
 }
 
-.empty-url:active, .settingDot:active, #myappShowpwd:active{
+.empty-url:active, .seTTing:active, #myappShowpwd:active, .toIndex:active{
     transform: scaleY(0.9) scaleX(1.75) translateY(3px);
 }
 
@@ -152,38 +159,37 @@
 }
 
 meter {
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
-  
     width: 87%;
     height: 20px;
     border-radius: 8.5px;
     font-family: cursive; 
     text-align: center;
     color: rgb(200, 92, 80);
-  
+    background: none;
+
     /* Firefox */
     background: none;
     background-color: rgba(0, 0, 0, 0.1);
 }
   
 meter::-webkit-meter-bar {
+    width: 100%;
+    height: 20px;
+    transition: 1s width;
     background: none;
-    background-color: rgba(0,0,0,0.1);
 }
 
 meter[value="1"]::-webkit-meter-optimum-value { background: rgba(255, 0, 0, 0.795); }
-meter[value="2"]::-webkit-meter-optimum-value { background: rgba(255, 255, 0, 0.795); }
-meter[value="3"]::-webkit-meter-optimum-value { background: rgba(255, 166, 0, 0.795); }
+meter[value="2"]::-webkit-meter-optimum-value { background: rgba(255, 166, 0, 0.795); }
+meter[value="3"]::-webkit-meter-optimum-value { background: rgba(255, 255, 0, 0.795); }
 meter[value="4"]::-webkit-meter-optimum-value { background: rgba(0, 128, 0, 0.795); }
-
+meter[value="5"]::-webkit-meter-optimum-value { background: rgba(0, 66, 128, 0.795); }
 
 .pwd-feedback {
     color: rgba(200, 92, 80, 0.719);
     width: 100%;
     font-family: cursive;
-    padding: 5px;
+    padding: 8px;
     white-space: pre-wrap;
     word-wrap: break-word;
 }
