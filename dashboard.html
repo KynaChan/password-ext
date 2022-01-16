@@ -1,9 +1,6 @@
 
+<div id="dashboard" class="content">
 
-    <div class="inputBox headerBox" style="color: rgb(245, 78, 60);">
-        <div>Account manager</div>
-        <div class="fa fa-arrow-alt-circle-left seTTing"></div>
-    </div>
     <div class="inputBox" id="url-box"  >
         <div class="fa fa-link"></div>
         <input 
@@ -13,3 +10,45 @@
             class="myapp-input" />
         <div class="fa fa-times empty-url"></div>
     </div>
+    <div class="sub-header inputBox" id="page-title">
+        
+        <span id="page-title-btn" class="material-icons-round" >arrow_back</span>
+        <label id="page-title-label">VALUE</label>
+        <span id="page-title-btn" class="material-icons-round" >remove</span>
+        
+    </div>
+
+    <div id="dashboard-list"></div>
+
+</div>
+
+
+<style>
+[catlocker] #dashboard-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    max-height: 230px;
+    gap: 10px;
+    padding: 5px;
+}
+
+[catlocker] .material-icons-round{
+    cursor: pointer;
+    font-size: 30px;
+    opacity: .7;
+    user-select: none;
+}
+
+[catlocker] .material-icons-round:hover{
+    opacity: 1;
+}
+
+
+
+
+
+</style>
+

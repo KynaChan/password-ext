@@ -1,56 +1,100 @@
 
-* {
+[catlocker] * {
     box-sizing: border-box;
 }
 
+/* width */
+[catlocker] ::-webkit-scrollbar {
+    width: 5px;
+}
+  
+/* Track */
+[catlocker] ::-webkit-scrollbar-track {
+    box-shadow: none;
+    border-radius: 10px;
+    margin: 5px;
+}
 
-#myapp-body ::placeholder {
+/* Handle */
+[catlocker] ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.315); 
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+[catlocker] ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.726); 
+}
+
+body[catlocker] ::placeholder {
     color: rgb(209, 54, 37);
     opacity: .4;
     font-weight: normal;
 }
 
-
-#myapp-body { 
+body[catlocker] 
+{  
     width:400px;
     height: fit-content;
-    padding-right: 5px;
     border: solid 6px rgba(197, 84, 71, 0.945);
-    border-radius: 10px;
     background-color: rgba(248, 239, 238, 0.938);
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 0;
+    box-sizing: border-box;
+    padding: 10px;
+    gap: 10px;
 }
 
 
-.headerBox{
+[catlocker] main {
+    width: 100%;
+    margin-top: 50px;
+}
+
+[catlocker] .content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: fit-content;
+}
+
+[catlocker] .headerBox {
+    position: fixed;
+    top: 0;
+    left: 0;
     font-weight: bold;
-    text-align:center;
+    font-size: 1.3rem;
     user-select: none;
-
+    background-color: rgba(197, 84, 71, 0.945); 
+    color: white !important;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 20px;
 }
 
 
-.inputBox {
+[catlocker] .inputBox {
     position: relative;
     display:flex;
     align-items: center;
     justify-content: space-between;
-    width: 90%;
-    padding: 0.5rem;
+    width: 100%;
     border-radius: 0.5rem;
     background-color:rgba(250,211,207,1);
     box-shadow: 0.35rem 0.35rem 0.15rem rgba(247, 195, 189, 0.897);
     color: rgba(228, 95, 80, 0.788);
-    margin: 10px;
     padding: 10px;
     font-size: 1.3rem;
-    
+    left: -2px;
 }
 
-.passwordBox {
+[catlocker] .passwordBox {
     position: relative;
     display:flex;
     align-items: center;
@@ -58,7 +102,7 @@
 }
 
 
-.myapp-input {
+[catlocker] .myapp-input {
     margin: 0 0.5rem 0 0.5rem;
     width: 100%;
     border: none;
@@ -72,16 +116,14 @@
 
 }
 
-.myapp-input:hover, .myapp-input:focus {
+[catlocker] .myapp-input:hover, .myapp-input:focus {
     border: none;
     transition: all .5s linear;
     box-shadow: inset 0px 0px 10px  rgba(226, 59, 41, 0.616);
 }
 
-.saveButton {
-    margin: 20px;
+[catlocker] .saveButton {
     width: 100px;
-    justify-self: center;
     border-radius: 15px;
     background: rgba(250,211,207,1);
     padding: 10px;
@@ -90,14 +132,15 @@
     color: rgba(230, 64, 46, 0.979);
     font-weight: bold;
     font-size: 15px;
+    align-self: center;
 }
 
-.saveButton:active {
+[catlocker] .saveButton:active {
     box-shadow: none;
     transform: translateY(2px);
 }
 
-.drop-down {
+[catlocker] .drop-down {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -109,16 +152,17 @@
     background: rgb(255, 168, 159);
     border: solid 1px rgba(228, 95, 80, 0.788);
     border-radius: 10px;
-    height: fit-content;
+    height: 200px;
+    overflow: auto;
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.459);
     padding: 5px;
     font-weight: bold;
     font-size: 15px;
 }
 
-.drop-down-row {
+[catlocker] .drop-down-row {
     color: white;
-    background: rgba(228, 95, 80, 0.527);
+    background: rgba(228, 95, 80, 0.418);
     border-radius: 10px;
     padding: 5px;
     cursor: pointer;
@@ -126,28 +170,31 @@
     overflow-wrap: break-word;
 }
 
-.drop-down-row:hover {
+[catlocker] .drop-down-row:hover {
     background: rgba(228, 95, 80, 0.178);
 }
 
 
-.empty-url, .seTTing, #myappShowpwd, .toIndex{
+[catlocker] .empty-url, #page-btn, #myappShowpwd{
     cursor: pointer;
-    opacity: .5;
+    opacity: .8;
+    user-select: none;
 }
 
-.empty-url:hover, .seTTing:hover, #myappShowpwd:hover, .toIndex:hover{
+[catlocker] .empty-url:hover, #page-btn:hover, #myappShowpwd:hover{
     opacity: 1;
 }
 
-.empty-url:active, .seTTing:active, #myappShowpwd:active, .toIndex:active{
+[catlocker] .empty-url:active, #page-btn:active, #myappShowpwd:active{
     transform: scaleY(0.9) scaleX(1.75) translateY(3px);
 }
 
+[catlocker] #page-btn {
+    font-size: 28px;
+}
 
 
-
-.pwStrength{
+[catlocker] .pwStrength{
     position: relative;
     align-items: center;
     justify-items: center;
@@ -158,34 +205,8 @@
     padding: 5px;
 }
 
-meter {
-    width: 87%;
-    height: 20px;
-    border-radius: 8.5px;
-    font-family: cursive; 
-    text-align: center;
-    color: rgb(200, 92, 80);
-    background: none;
 
-    /* Firefox */
-    background: none;
-    background-color: rgba(0, 0, 0, 0.1);
-}
-  
-meter::-webkit-meter-bar {
-    width: 100%;
-    height: 20px;
-    transition: 1s width;
-    background: none;
-}
-
-meter[value="1"]::-webkit-meter-optimum-value { background: rgba(255, 0, 0, 0.795); }
-meter[value="2"]::-webkit-meter-optimum-value { background: rgba(255, 166, 0, 0.795); }
-meter[value="3"]::-webkit-meter-optimum-value { background: rgba(255, 255, 0, 0.795); }
-meter[value="4"]::-webkit-meter-optimum-value { background: rgba(0, 128, 0, 0.795); }
-meter[value="5"]::-webkit-meter-optimum-value { background: rgba(0, 66, 128, 0.795); }
-
-.pwd-feedback {
+[catlocker] .pwd-feedback {
     color: rgba(200, 92, 80, 0.719);
     width: 100%;
     font-family: cursive;

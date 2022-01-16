@@ -21,8 +21,10 @@
         {
             "matches":["<all_urls>"],
             "js":[
-                "content.js",
-                "libs/jquery.js"
+                "script/main.js",
+                "script/dashboard.js",
+                "script/home.js",
+                "script/libs/jquery.js"
             ],
 
             "css":["style.css"]
