@@ -91,22 +91,69 @@ function saveData() {
 }
 
 
+
+function SelectUrl(url) {
+  $("#url-input").val(url);
+}
+
+function PopulateDropDown()
+{
+  $(".drop-down-row").remove();
+  let value = $("#url-input").val();
+  let dropDown = $(".drop-down");
+  for (var i=0; i < localStorage.length; i++)
+  {
+      let storeKey = localStorage.key(i);
+      //if(i == 5) break;
+      if (value.length && !storeKey.includes(value)) continue;
+      dropDown.append(`<div class="drop-down-row" id="d-row-${i}">${storeKey}</div>`);
+      $(`#d-row-${i}`).mousedown(() => SelectUrl(storeKey));
+  } 
+
+  if(!dropDown.children().length) {
+      dropDown.append(`<div class="drop-down-row">No URLs found.</div>`);
+  }
+}
+
+function FocusUrlInput() {
+  $("#url-box").append(`<div class="drop-down"></div>`);
+  PopulateDropDown();
+}
+
+function BlurUrlInput() {
+  $(".drop-down").remove();
+}
+
+function updateUrlInput() { 
+  PopulateDropDown();
+}
+
+
+
 /*
 setItem and getItem from the localStorage
 */
 
 
 
+
+
 function OnHomeLoaded()
 {
-  console.log("LOADED HOME");
+  console.log("HOME LOADED");
+  
   $("#myappShowpwd").mousedown(function(){
     $("#myapp-password").attr('type', "text");
   });
   $("#myappShowpwd").mouseup(function(){
       $("#myapp-password").attr('type', "password");
   });
+
   $("#save-btn").click(saveData);
+  $("#myapp-password").keypress(function (e){
+    if(e.which == 13){$("#save-btn").click();}
+  });
+
   $(".empty-url").click(() => SelectUrl(''));
   $("#url-input").focus(FocusUrlInput);
   $("#url-input").blur(BlurUrlInput);

@@ -175,17 +175,17 @@ body[catlocker]
 }
 
 
-[catlocker] .empty-url, #page-btn, #myappShowpwd{
+[catlocker] .empty-url, #page-btn, #myappShowpwd, .material-icons-round{
     cursor: pointer;
     opacity: .8;
     user-select: none;
 }
 
-[catlocker] .empty-url:hover, #page-btn:hover, #myappShowpwd:hover{
+[catlocker] .empty-url:hover, #page-btn:hover, #myappShowpwd:hover, .material-icons-round:hover{
     opacity: 1;
 }
 
-[catlocker] .empty-url:active, #page-btn:active, #myappShowpwd:active{
+[catlocker] .empty-url:active, #page-btn:active, #myappShowpwd:active, .material-icons-round:active{
     transform: scaleY(0.9) scaleX(1.75) translateY(3px);
 }
 
@@ -194,15 +194,17 @@ body[catlocker]
 }
 
 
-[catlocker] .pwStrength{
+[catlocker] .pwd-strength{
     position: relative;
     align-items: center;
     justify-items: center;
-    width: 100%;
+    width: 350;
     color: rgba(197, 84, 71, 0.945);
     font-size: 15px;
-    margin-left: 50px;
+    font-family:cursive;
     padding: 5px;
+    background:darkblue;
+    border-radius: 15px;
 }
 
 
@@ -214,4 +216,6 @@ body[catlocker]
     white-space: pre-wrap;
     word-wrap: break-word;
 }
+
+
 

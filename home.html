@@ -6,6 +6,7 @@
         placeholder="URL..."
         id="url-input" 
         type="text" 
+        spellcheck="false"
         class="myapp-input" />
       <div class="fa fa-times empty-url"></div>
   </div>
@@ -13,7 +14,7 @@
 
   <div class="inputBox" >
     <div class="fa fa-user"></div>
-    <input placeholder="User Name..." id="myapp-userName" class="myapp-input" type="text"/>
+    <input placeholder="User Name..." spellcheck="false" id="myapp-userName" class="myapp-input" type="text"/>
   </div>
 
 
@@ -22,7 +23,9 @@
     <input  placeholder="Password..." id="myapp-password" class="myapp-input" type="password"/>
     <div class="fa fa-eye" id="myappShowpwd"></div>
   </div>
+
   <b class="pwd-feedback"></b>
+  <div class="pwd-strength">Password Strength</div>
 
   <button id="save-btn" class="saveButton">Save Data</button>
     

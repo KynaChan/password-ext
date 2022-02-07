@@ -1,0 +1,219 @@
+
+<div id="generator" class="content">
+
+    <div class="inputBox">
+        <input  placeholder="Password..." id="generatePwd" 
+            class="newPwd" type="password" 
+            spellcheck="false" 
+        />
+        <!-- <p id="generatePwd">dddd</p> -->
+        <div class="fa fa-eye" id="myappShowpwd"></div>
+    </div>
+
+    <div class=" sliderBox">
+        <b>4</b>
+        <input type="range" min="4" max="32" value="18" class="slider" />
+        <b>32</b>
+        <span class="numb" id="numb">18</span>
+    </div>
+
+
+    <div class="aDiv">
+        <div class="setting row">
+            <label for="symbols">Symbols</label>
+            <input class="selection" type="checkbox" id="symbols" checked />
+        </div>
+        <div class="setting row">
+            <label for="numbers">Numbers</label>
+            <input class="selection" type="checkbox" id="numbers" checked />
+        </div>
+        <div class="setting row">
+            <label for="uppercase">Uppercase</label>
+            <input class="selection" type="checkbox" id="uppercase" checked />
+        </div>
+    </div>
+
+
+    <div class="bDiv">
+        <button class="saveButton" id="generate" >Generate Password</button>
+        <button class="saveButton" id="copyPwd" style="font-size: 20px; width: 70px;">
+            <div class="fa fa-copy"></div>
+        </button>
+
+    </div>
+
+
+</div>
+
+
+<style>
+
+[catlocker] .setting{
+    border-radius: 5px;
+    border-bottom: 2px solid rgb(255, 139, 126);
+    border-right: 2px solid rgb(255, 139, 126);
+    font-size: 16px; 
+    font-weight: bold;
+    color: rgb(255, 139, 126);
+    margin: 4px;
+    padding: 5px 10px 5px 20px;
+}
+
+[catlocker] .row{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    font-family: cursive; 
+}
+
+
+[catlocker] .selection{
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    color: currentColor;
+    background: rgb(252, 220, 216);
+    margin-top: 5px;
+    width: 48px;
+    height: 15px;
+    border-radius: 11px;
+    display: grid;
+    place-content: center;
+}
+
+[catlocker] .selection::before{
+    content: "";
+    position: relative;
+    /* left: -50%; */
+    transform: translateX(-60%);
+
+    width: 23px;
+    height: 23px;
+    border-radius: 23px;
+    background: rgb(167, 125, 125);
+    transition: all .8s;
+}
+
+[catlocker] .selection:checked::before{
+    transform: translateX(60%);
+    background: rgb(255, 154, 140);
+}
+
+[catlocker] .selection:focus{
+    outline: max(3px, 3px) solid currentColor;
+    outline-offset: max(3px, 3px);
+}
+
+
+
+
+[catlocker] .sliderBox{
+    color: rgb(255, 139, 126);
+}
+
+[catlocker] .slider{
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgb(252, 220, 216);
+    outline: none;
+    width: 75%;
+    height: 15px;
+    border-radius: 11px;
+    opacity: .7;
+}
+[catlocker] .sliderBox:hover .numb{
+    visibility: visible;
+}
+[catlocker] .slider:hover {
+    opacity: 1;
+}
+
+[catlocker] .slider::-webkit-slider-thumb{
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 23px;
+    height: 23px;
+    border-radius: 23px;
+    background: rgb(255, 154, 140);
+    cursor: pointer;
+}
+[catlocker].slider::-moz-range-thumb{
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 23px;
+    height: 23px;
+    border-radius: 23px;
+    background: rgb(255, 154, 140);
+    cursor: pointer;
+}
+
+[catlocker] .sliderBox .numb{ 
+    visibility: hidden; 
+    width: 20px;
+    background: white; 
+    text-align: center; 
+    border-radius: 6px; 
+    padding: 0 5px; 
+    z-index: 1;
+    user-select: none;
+
+    
+    top: 150%;
+    left: 50%;
+    margin-left: -150px;
+    margin-top: 30px;
+}    
+
+[catlocker] .sliderBox .numb::after{
+    content:"";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+
+
+
+[catlocker] .newPwd{
+    width: 90%;
+    border: none;
+    outline: none;
+    padding: 7px;
+    border-radius: 11px;
+    background: rgba(228, 95, 80, 0.432);
+}
+
+[catlocker] .newPwd:focus{
+    outline:rgb(224, 102, 46);
+}
+
+
+
+[catlocker] .bDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 6px;
+    user-select: none;
+}
+
+
+
+[catlocker] .aDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 4px;
+    user-select: none;
+    
+}
+
+
+
+
+</style>
+
+

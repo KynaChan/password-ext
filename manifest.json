@@ -23,6 +23,7 @@
             "js":[
                 "script/main.js",
                 "script/dashboard.js",
+                "script/generator.js",
                 "script/home.js",
                 "script/libs/jquery.js"
             ],
