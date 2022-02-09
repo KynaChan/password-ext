@@ -3,6 +3,12 @@
     box-sizing: border-box;
 }
 
+
+[catlocker] ::selection{
+    background-color:rgb(255, 227, 70);
+}
+
+
 /* width */
 [catlocker] ::-webkit-scrollbar {
     width: 5px;
@@ -29,12 +35,12 @@
 body[catlocker] ::placeholder {
     color: rgb(209, 54, 37);
     opacity: .4;
-    font-weight: normal;
+    font-weight: bold;
 }
 
 body[catlocker] 
 {  
-    width:400px;
+    width: 400px;
     height: fit-content;
     border: solid 6px rgba(197, 84, 71, 0.945);
     background-color: rgba(248, 239, 238, 0.938);

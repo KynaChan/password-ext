@@ -2,35 +2,44 @@
 <div id="generator" class="content">
 
     <div class="inputBox">
-        <input  placeholder="Password..." id="generatePwd" 
+        <input  placeholder="Password..." id="newPwd" 
             class="newPwd" type="password" 
-            spellcheck="false" 
+            spellcheck="false" maxlength="0"
         />
         <!-- <p id="generatePwd">dddd</p> -->
         <div class="fa fa-eye" id="myappShowpwd"></div>
     </div>
 
     <div class=" sliderBox">
-        <b>4</b>
-        <input type="range" min="4" max="32" value="18" class="slider" />
+        <b style="padding-left: 8px;">Your password length:</b>
+        <input type="number" min="6" max="32" value="8" id="numbInput" />
+        <br>
+        <b>6</b>
+        <input type="range" min="6" max="32" value="8" class="slider" />
         <b>32</b>
-        <span class="numb" id="numb">18</span>
+        <span class="numb" id="numb">8</span>
     </div>
 
 
     <div class="aDiv">
+
         <div class="setting row">
-            <label for="symbols">Symbols</label>
-            <input class="selection" type="checkbox" id="symbols" checked />
+            <label for="lower">Lowercase</label>
+            <input class="selection" type="checkbox" id="lower" checked />
         </div>
         <div class="setting row">
-            <label for="numbers">Numbers</label>
-            <input class="selection" type="checkbox" id="numbers" checked />
+            <label for="upper">Uppercase</label>
+            <input class="selection" type="checkbox" id="upper" checked />
         </div>
         <div class="setting row">
-            <label for="uppercase">Uppercase</label>
-            <input class="selection" type="checkbox" id="uppercase" checked />
+            <label for="number">Numbers</label>
+            <input class="selection" type="checkbox" id="number" checked />
         </div>
+        <div class="setting row">
+            <label for="symbol">Symbols</label>
+            <input class="selection" type="checkbox" id="symbol" checked />
+        </div>
+
     </div>
 
 
@@ -55,8 +64,10 @@
     font-size: 16px; 
     font-weight: bold;
     color: rgb(255, 139, 126);
-    margin: 4px;
     padding: 5px 10px 5px 20px;
+    width: 85%;
+    align-self: center;
+    margin: 3px;
 }
 
 [catlocker] .row{
@@ -106,9 +117,35 @@
 
 
 
+[catlocker] #numbInput{
+    border-radius: 8px;
+    width: 40px;
+    border: none;
+    outline: none;    
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(255, 139, 126);
+}
+
+[catlocker] #numbInput::-webkit-outer-spin-button,
+    #numbInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+[catlocker] #numbInput[type=number] {
+  -moz-appearance: textfield;
+}
+
+
 
 [catlocker] .sliderBox{
     color: rgb(255, 139, 126);
+    font-weight: bold;
+    font-size: 18px;
+    width: 100%;
+    align-self: center;
+    margin: 7px 0 10px 15px;
+    height: 50px;
 }
 
 [catlocker] .slider{
@@ -116,7 +153,8 @@
     appearance: none;
     background: rgb(252, 220, 216);
     outline: none;
-    width: 75%;
+    margin-top: 10px;
+    width: 85%;
     height: 15px;
     border-radius: 11px;
     opacity: .7;
@@ -155,25 +193,12 @@
     border-radius: 6px; 
     padding: 0 5px; 
     z-index: 1;
+    font-size: 15px;
     user-select: none;
-
-    
-    top: 150%;
+    /* top: 150%;
     left: 50%;
-    margin-left: -150px;
-    margin-top: 30px;
+    margin-left: -150px; */
 }    
-
-[catlocker] .sliderBox .numb::after{
-    content:"";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent black transparent;
-}
 
 
 
@@ -181,8 +206,12 @@
     width: 90%;
     border: none;
     outline: none;
+    font-size: 20px;
     padding: 7px;
     border-radius: 11px;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(209, 54, 37);
     background: rgba(228, 95, 80, 0.432);
 }
 
@@ -206,7 +235,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    margin: 4px;
     user-select: none;
     
 }
