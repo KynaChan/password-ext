@@ -34,7 +34,6 @@ function checkSelection()
     if (numberChars) lengthDivisor++;
     if (symbolChars) lengthDivisor++;
 
-
     for(i = 0; i < length; i++)
     {
         if (upperChars) { 
@@ -43,9 +42,11 @@ function checkSelection()
         }
         else if (numberChars) { 
             newPwd += getNumbers(); 
+            numberChars--;
         }
         else if (symbolChars) { 
             newPwd += getSymbols(); 
+            symbolChars--;
         } 
         else { 
             newPwd += getLower(); 

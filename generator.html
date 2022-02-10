@@ -10,7 +10,7 @@
         <div class="fa fa-eye" id="myappShowpwd"></div>
     </div>
 
-    <div class=" sliderBox">
+    <div class="sliderBox">
         <b style="padding-left: 8px;">Your password length:</b>
         <input type="number" min="6" max="32" value="8" id="numbInput" />
         <br>
@@ -21,12 +21,7 @@
     </div>
 
 
-    <div class="aDiv">
-
-        <div class="setting row">
-            <label for="lower">Lowercase</label>
-            <input class="selection" type="checkbox" id="lower" checked />
-        </div>
+    <div class="column">
         <div class="setting row">
             <label for="upper">Uppercase</label>
             <input class="selection" type="checkbox" id="upper" checked />
@@ -39,14 +34,13 @@
             <label for="symbol">Symbols</label>
             <input class="selection" type="checkbox" id="symbol" checked />
         </div>
-
     </div>
 
 
-    <div class="bDiv">
-        <button class="saveButton" id="generate" >Generate Password</button>
-        <button class="saveButton" id="copyPwd" style="font-size: 20px; width: 70px;">
-            <div class="fa fa-copy"></div>
+    <div class="btnDiv">
+        <button class="saveButton" id="generate" >Generate</button>
+        <button class="saveButton" id="copyPwd" >
+            <div class="fa fa-copy"></div><b> Copy</b>
         </button>
 
     </div>
@@ -58,23 +52,17 @@
 <style>
 
 [catlocker] .setting{
-    border-radius: 5px;
-    border-bottom: 2px solid rgb(255, 139, 126);
-    border-right: 2px solid rgb(255, 139, 126);
-    font-size: 16px; 
+    border-radius: 8px;
+    border-bottom: 3px solid rgb(255, 139, 126);
+    border-right: 3px solid rgb(255, 139, 126);
+    font-size: 16.5px; 
+    font-family: cursive; 
     font-weight: bold;
     color: rgb(255, 139, 126);
     padding: 5px 10px 5px 20px;
-    width: 85%;
+    width: 90%;
     align-self: center;
     margin: 3px;
-}
-
-[catlocker] .row{
-    display: flex;
-    flex-direction: row;
-    justify-content:space-between;
-    font-family: cursive; 
 }
 
 
@@ -221,22 +209,27 @@
 
 
 
-[catlocker] .bDiv{
+[catlocker] .btnDiv{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    margin: 6px;
+    justify-content: space-evenly;
+    margin: 5px 0 5px 0;
     user-select: none;
 }
 
 
+[catlocker] .row{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
 
-[catlocker] .aDiv{
+
+[catlocker] .column{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    user-select: none;
-    
+    align-content: space-between;
+    user-select: none;    
 }
 
 
