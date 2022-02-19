@@ -4,14 +4,14 @@
     "version": "1.0.0",
     "description": "Your personal account management system, password tester and generator. Here in CatLocker! ",
     "browser_action" : {
-        "default_icon" : "icon/image3.png",
+        "default_icon" : "icon/image2.png",
         "default_popup": "index.html"
     },
     "icons": {
-        "16": "icon/image3.png",
-        "32": "icon/image3.png",
-        "48": "icon/image3.png",
-        "128":"icon/image3.png"
+        "16": "icon/image2.png",
+        "32": "icon/image2.png",
+        "48": "icon/image2.png",
+        "128":"icon/image2.png"
        },
        "permissions":[
            "activeTab",
