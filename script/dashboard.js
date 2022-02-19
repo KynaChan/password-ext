@@ -4,20 +4,20 @@
 function ShowWebSearch()
 {
   let webList = $(".dashboard-list");
-  $(".accountRows").remove();
+  $(".webRows").remove();
   let value = $("#url-input").val();
   for (var i=0; i < localStorage.length; i++)
   {
       let storeKey = localStorage.key(i);
       if (value.length && !storeKey.includes(value)) continue;
-      webList.append(`<div class="inputBox accountRows" id="row-${i}">${storeKey}</div>`);
+      webList.append(`<div class="inputBox webRows" id="row-${i}">${storeKey}</div>`);
       $(`#row-${i}`).mousedown(function(storeKey){
-        $(".accountRows").append(storeKey);
+        $(".webRows").append(storeKey);
       });
   } 
 
   if(!webList.children().length) {
-    webList.append(`<div class="inputBox accountRows">No URLs found.</div>`);
+    webList.append(`<div class="inputBox webRows">No URLs found.</div>`);
   }
 }
 
@@ -35,14 +35,16 @@ function PopulateWebList()
   for (var i = 0; i < localStorage.length; i++)
   {
       let storeKey = localStorage.key(i);
-      webList.append(`<div class="inputBox accountRows" id="row-${i}" style="word-break:break-all;">${storeKey} 
-      <span class="material-icons-round forMore" style="font-size: 30px; font-weight: bold;" id='forMore-${i}'>more_horiz</span></div>`);
-      $(`#forMore-${i}`).on("click", () => SelectWeb(storeKey));
+
+      webList.append(`<div class="inputBox webRows" id="row-${i}">${storeKey} 
+        <span class="material-icons-round forMoreBtn" id='forMoreBtn-${i}'>more_horiz</span>
+      </div>`);
+      $(`#forMoreBtn-${i}`).on("click", () => SelectedWeb(storeKey));
   } 
 }
 
 
-function SelectWeb(key)
+function SelectedWeb(key)
 {
   let webList = $("#dashboard-list");
   webList.empty();
@@ -57,8 +59,9 @@ function SelectWeb(key)
   let accounts = GetAccounts(key);
   for(var id in accounts)
   {
-    let row =`<div class="inputBox" style="word-break:break-all;" remove-${id}>${id}<span class="material-icons-round" button-remove-${id} 
-              style="font-weight:bold; font-size: 30px;">remove</span></div>`;
+    let row =`<div class="boxColumn"><div class="inputBox accountRows" remove-${id}>${id}
+      <span class="material-icons-round" button-remove-${id} style="font-weight:bold; font-size: 30px;">remove</span></div>
+    <div class="accountPwd" pwd-${id} >Password: ${accounts[id]}</div></div>`;
 
     webList.append(row);
     let t = id;

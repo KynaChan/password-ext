@@ -14,9 +14,13 @@
 function copyPwd() 
 {
     var pwdInput = $("#newPwd").val();
+    var copyText = $("#copyPwd");
+
     $.trim(pwdInput);
     navigator.clipboard.writeText(pwdInput);
-    //console.log("COPIED!!");
+    copyText.text("COPIED!");
+
+    console.log("COPIED!!");
 }
 
 
@@ -62,7 +66,12 @@ function generator()
 {
     var newPwd = checkSelection();
         shufflePwd = shuffle(newPwd);
+    var copyText = $("#copyPwd");
+
     $("#newPwd").val(shufflePwd);
+    copyText.text("");
+    copyText.append('<div class="fa fa-copy"></div><b> Copy</b>');
+
 }
 
 
@@ -109,8 +118,6 @@ function shuffle(pwd)
 
 
 
-
-
 function OnGeneratorLoaded()
 {
 
@@ -120,7 +127,7 @@ function OnGeneratorLoaded()
         $("#numbInput").val(numb);
         $("#numb").text(numb);
       });
-      $('#numbInput').on('input', function(){
+    $('#numbInput').on('input', function(){
         var numb = $(this).val();
 
         if (numb > 32) { $(this).val(32); }
@@ -128,23 +135,16 @@ function OnGeneratorLoaded()
 
         $('.slider').val($(this).val());
         $("#numb").text($(this).val());
-      });
+    });
     
     $(".slider").mousemove(function(event){ 
         $("#numb").css("margin-left",event.pageX)
     })
 
     // $(".slider").on('input', slider);
-     $("#generate").click(generator);
-    
-    $("#myappShowpwd").mousedown(function(){
-        $("#newPwd").attr('type', "text");
-      });
-      $("#myappShowpwd").mouseup(function(){
-          $("#newPwd").attr('type', "password");
-      });
-
-      $("#copyPwd").click(copyPwd);
+    $("#generate").click(generator);
+    $("#eyeShow").click(pwdShow);
+    $("#copyPwd").click(copyPwd);
 
     console.log("generator LOADED");
 }

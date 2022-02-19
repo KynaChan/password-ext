@@ -1,77 +1,115 @@
 
 
-
-let strengthText = {
-  1: "Bad",
-  2: "Weak",
-  3: "Good",
-  4: "Strong",
-  5: "Everything is great, good to go!"
-}
-
-let textList = [ "Use 8 or more characters with a mix of letters, numbers & symbols.",
-                  "Try not to using repeating characters.",
-                  "Maybe with CAPITAL letters.",
-                  "Maybe with numbers.",
-                  "Maybe with symbols."
-                  ];
-
-function getPasswordScore(pwd)
+function checkPwd(pwd)
 {
   let strength = 0;
-  
-  if (pwd.length < 8) return strength = 1;
-  else{   strength++;
-      delete(textList[1]);
+
+
+// check length
+  if (pwd.length >= 8)
+  {
+    strength+=20; 
+    $("#length").addClass("green");
   }
-  
-  
+  else
+  {
+    $("#length").removeClass("green");
+    $("#length").addClass("red");
+  }
+
+
+// check repeat char
   let chFound = 0;
   for (let i = 0; i < pwd.length; i++) 
   {
-      if (pwd[i].match(pwd[i+1]) && 
-          !pwd[i].match(pwd[i+2]))
-      {chFound++;}
+    if (pwd[i].match(pwd[i+1]) && !pwd[i].match(pwd[i+2]))
+    chFound++;
   }
   if(chFound < 2) 
-  { textList.remove(textList[1]);
-  strength++;}
+  {
+    strength+=20;
+    $("#repeat").addClass("green");
+  }
+  else
+  {
+    $("#repeat").removeClass("green");
+    $("#repeat").addClass("red");
+  }
+
+
+
+// check capital
+  let cap = /[A-Z]+/;
+
+  if (pwd.match(cap)) 
+  {
+    strength+=20;
+    $("#capital").addClass("green");
+  }
+  else
+  {
+    $("#capital").removeClass("green");
+    $("#capital").addClass("red");
+  }
+
+
   
-  if (pwd.match(/[A-Z]+/)) 
-  strength++;
+// check number
+  let num = /[0-9]+/;
 
-  if (pwd.match(/[0-9]+/))
-  strength++;
+  if (pwd.match(num))
+  {
+    strength+=20;  
+    $("#number").addClass("green");
+  }
+  else
+  {
+    $("#number").removeClass("green");
+    $("#number").addClass("red");
+  }
 
-  if (pwd.match(/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/)) 
-  strength++;
 
-  $("#pwd-feedback").text(textList);
+
+// check symbol
+  let sym = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+  if (pwd.match(sym)) 
+  {
+    strength+=20; 
+    $("#symbol").addClass("green");
+  }
+  else
+  {
+    $("#symbol").removeClass("green");
+    $("#symbol").addClass("red");
+  }
+
+
   return strength;
 }
 
-function UpdateStrengthFeedback()
+
+
+
+function UpdateStrength()
 {
-  let pwd = $("#myapp-password").val();
-  let strength = getPasswordScore(pwd);
+  let pwd = $("#CL-pwd").val();
+  let strength = checkPwd(pwd);
 
-  console.log(strength);
-  $("#strength-bar").attr("value", strength);
-  //$("#pwd-feedback").text(strengthText[strength]);
-
+  // console.log(strength);
+  $("#meter").attr("value", strength);
 }
-
-
 
 
 function updatePwdInput()
 {
-  UpdateStrengthFeedback();
+  UpdateStrength();
 }
 
+
 function saveData() {
-  const user = $("#myapp-userName").val();
-  const pwd =  $("#myapp-password").val();
+  const user = $("#CL-username").val();
+  const pwd =  $("#CL-pwd").val();
   const urlInput = $("#url-input").val();
 
   if (!urlInput.length) return alert("Enter a website.");
@@ -86,10 +124,9 @@ function saveData() {
   data = window.localStorage.getItem(urlInput) ? JSON.parse(window.localStorage.getItem(urlInput)): {}
   data[user] = pwd
   window.localStorage.setItem(urlInput, JSON.stringify(data));
-  $("#myapp-userName").val("");
-  $("#myapp-password").val("");
+  $("#CL-username").val("");
+  $("#CL-pwd").val("");
 }
-
 
 
 function SelectUrl(url) {
@@ -130,27 +167,15 @@ function updateUrlInput() {
 
 
 
-/*
-setItem and getItem from the localStorage
-*/
-
-
-
-
-
 function OnHomeLoaded()
 {
   console.log("HOME LOADED");
+
   
-  $("#myappShowpwd").mousedown(function(){
-    $("#myapp-password").attr('type', "text");
-  });
-  $("#myappShowpwd").mouseup(function(){
-      $("#myapp-password").attr('type', "password");
-  });
+  $("#eyeShow").click(pwdShow);
 
   $("#save-btn").click(saveData);
-  $("#myapp-password").keypress(function (e){
+  $("#CL-pwd").keypress(function (e){
     if(e.which == 13){$("#save-btn").click();}
   });
 
@@ -158,7 +183,9 @@ function OnHomeLoaded()
   $("#url-input").focus(FocusUrlInput);
   $("#url-input").blur(BlurUrlInput);
   $("#url-input").on('input', updateUrlInput);
-  $("#myapp-password").on('input', updatePwdInput);
+
+  $("#CL-pwd").keyup(UpdateStrength);
+  // $("#CL-pwd").on("input",updatePwdInput);
 }
 
 

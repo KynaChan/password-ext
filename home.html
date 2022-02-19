@@ -3,7 +3,7 @@
   <div class="inputBox" id="url-box">
     <div class="fa fa-link"></div>
       <input 
-        placeholder="URL..."
+        placeholder="URL / Application"
         id="url-input" 
         type="text" 
         spellcheck="false"
@@ -14,18 +14,29 @@
 
   <div class="inputBox" >
     <div class="fa fa-user"></div>
-    <input placeholder="User Name..." spellcheck="false" id="myapp-userName" class="myapp-input" type="text"/>
+    <input placeholder="User Name" spellcheck="false" id="CL-username" class="myapp-input" type="text"/>
   </div>
 
 
-  <div class="inputBox">
-    <div class="fa fa-lock"></div>
-    <input  placeholder="Password..." id="myapp-password" class="myapp-input" type="password"/>
-    <div class="fa fa-eye" id="myappShowpwd"></div>
-  </div>
+  <div class="pwd">
 
-  <b class="pwd-feedback"></b>
-  <div class="pwd-strength">Password Strength</div>
+    <!-- PWD test: asasdasdqWwweev -->
+    <div class="inputBox">
+      <div class="fa fa-lock"></div>
+      <input  placeholder="Password" id="CL-pwd" class="myapp-input" type="password"/>
+      <div class="fa fa-eye" id="eyeShow"></div>
+    </div>
+    <div class="message">
+      <b class="red" id="repeat" >Without repeating characters twice<br></b>
+      <b class="red" id="length" >Minimum 8 characters<br></b>
+      <b class="red" id="capital" >Capital letters<br></b>
+      <b class="red" id="number" >Numbers<br></b>
+      <b class="red" id="symbol" >Symbols<br></b>
+      <progress class="pwd-strength" id="meter" min="0" max="100" value="0"></progress>
+
+    </div>
+
+  </div>
 
   <button id="save-btn" class="saveButton">Save Data</button>
     

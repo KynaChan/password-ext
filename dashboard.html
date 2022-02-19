@@ -4,7 +4,7 @@
     <div class="inputBox" id="url-box"  >
         <div class="fa fa-link"></div>
         <input 
-            placeholder="URL..."
+            placeholder="URL.."
             id="url-input" 
             type="text" 
             spellcheck="false"
@@ -14,13 +14,13 @@
     <div class="inputBox" id="page-title">
         
         <span id="page-title-btn" class="material-icons-round" >arrow_back</span>
-        <label id="page-title-label" style="word-break:break-all;">VALUE</label>
-        <span class="material-icons-round webRemoveBtn" >delete_forever</span>
+        <label id="page-title-label">VALUE</label>
+        <span class="material-icons-round webRemoveBtn" style="font-size: 30px;">delete_forever</span>
         
     </div>
 
     <div class="currTab">
-        <b class="pageText" style="font-size: 16px; padding-left: 10px; opacity: .8;">Current page</b>
+        <b class="pageText" style="font-size: 16px; padding-left: 10px; opacity: .9;">Current page</b>
         <div class="tab" style="margin:0px 0px 5px 25px;font-weight: bold;"></div>
     </div>
 
@@ -31,29 +31,39 @@
 
 <style>
 
-[catlocker] .forMore {
+
+/*  shows when hover 
+    box-shadow: [X] [Y] [blur] [only one side] [color];
+*/
+[catlocker] .forMoreBtn {
     display: none;
+    font-size: 30px;
+    font-weight: bold;
+    padding-left: 5px;
+    border-left: 4px solid white;
 }
 
-[catlocker] .accountRows:hover .forMore{
+[catlocker] .webRows:hover .forMoreBtn{
     display: block;
 }
 
-[catlocker] #page-title-label{
-    font-weight: bold;
+[catlocker] .webRows:hover {
+    box-shadow: inset 15px 0 0 -11px rgba(228, 95, 80, 0.61);
 }
 
+
+/* current tab box */
 [catlocker] .currTab{
+    right: 2px;
     width: 100%;
     height: 60px;
-    border-radius: 0.5rem;
-    background-color:rgb(248, 154, 143);
-    box-shadow: 0.35rem 0.35rem 0.15rem rgba(247, 195, 189, 0.897);
-    color: rgb(250, 223, 220);
-    font-size: 1.3rem;
-    right: 2px;
+    font-size: 20.8px;
     word-break:break-all;
-
+    border-radius: 0.5rem;
+    
+    color: rgb(252, 233, 231);
+    background-color:rgb(248, 154, 143);
+    box-shadow: 4px 5px 5px rgba(247, 195, 189, 0.897);
     /* display:inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -61,21 +71,81 @@
 }
 
 
-
-[catlocker] #dashboard-list {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: auto;
-    height: 250px;
-    gap: 10px;
-    padding: 5px;
-}
-
+/* selected web title box */
 [catlocker] #page-title-btn{
     font-size: 30px;
     font-weight: bold;
+    padding-right: 8px;
+    border-right: 2px solid rgba(228, 95, 80, 0.788);
+}
+
+[catlocker] #page-title-label{
+    width: 230px; 
+    font-size: 24px;
+    overflow: hidden;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap; 
+    text-overflow: ellipsis; 
+}
+
+[catlocker] .accountRows{
+    width: 350px;
+    font-weight: 630;
+    padding-left: 17px;
+    word-break:break-all;
+}
+/* show selected aaccount pwd */
+[catlocker] .boxColumn:hover .accountPwd{
+    display: block;
+}
+[catlocker] .boxColumn:hover .accountRows{
+    margin-top: 6px;
+    border-left: 3.5px solid rgba(228, 95, 80, 0.61);
+    border-top: 3.5px solid rgba(228, 95, 80, 0.61);
+    /* box-shadow: 15px 0 4px -5px white; */
+}
+
+[catlocker] .accountPwd{
+
+    display: none;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 640;
+    margin-left: 1.5px;
+    /* margin-bottom: 5px; */
+    border-radius: 0 0 8px 8px;
+
+    color: rgba(200, 92, 80, 0.877);
+    background-color:rgba(247, 195, 189, 0.897);
+    border-left: 3.5px solid rgba(228, 95, 80, 0.61);
+    /* box-shadow: 0 3px 4px rgba(247, 195, 189, 0.897); */
+}
+
+[catlocker] .boxColumn{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+/* web list */
+[catlocker] #dashboard-list {
+    gap: 10px;
+    width: 100%;
+    padding: 2px;
+    height: 250px;
+    display: flex;
+    overflow: auto;
+    align-items: center;
+    flex-direction: column;
+}
+
+[catlocker] .webRows{
+    font-weight: 635;
+    padding-left: 17px;
+    font-family: cursive;
+    word-break:break-all;
 }
 
 

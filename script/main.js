@@ -8,19 +8,22 @@ let DATA = {
     "home": {
       onload: OnHomeLoaded,
       title: "Home",
-      label: ["enhanced_encryption","space_dashboard"],
     },
 
     "dashboard": {
       onload: OnDashBoardLoaded,
       title: "Dashboard",
-      label: "meeting_room"
+      selfIcon: "space_dashboard",
+      label: "meeting_room",
+      id:"dash"
     },
 
     "generator": {
       onload: OnGeneratorLoaded,
       title: "Generator",
-      label: "meeting_room"
+      selfIcon: "enhanced_encryption",
+      label: "meeting_room",
+      id:"genPwd"
     }
   }
 } 
@@ -41,25 +44,55 @@ function load(page) {
 
   $("main").load(`${page}.html`, pageData.onload)
   $("#title").text(`${DATA.title} - ${pageData.title}`);
-  $("#page-btn").text(pageData.label);
+  $(`#${pageData.id}`).text(pageData.label);
 
   DATA.page = page;
 }
 
-function ToggleTab()
+function ToggleGen()
 {
-  if(DATA.page == "home") {
-    load("generator")
-    //load("dashboard")
+  if(DATA.page != "generator") {
+    load("generator");
+    $("#dash").hide();
     return;
+  } else { 
+    load("home"); 
+    $("#dash").show();
+    //$(`#${pageData.id}`).text(pageData.selfIcon);
+    $("#genPwd").text("enhanced_encryption");
   }
+}
 
-  load("home");
+function ToggleDash()
+{
+  if(DATA.page != "dashboard") {
+    load("dashboard");
+    $("#genPwd").hide();
+    return;
+  } else {
+    load("home"); 
+    $("#genPwd").show();
+    $("#dash").text("space_dashboard");
+  }
 }
 
 
+function pwdShow(){
+  if( $("#CL-pwd").attr('type') == "password" || $("#newPwd").attr('type') == "password" )
+  { 
+    $("#CL-pwd").attr('type', "text"); 
+    $("#newPwd").attr('type', "text"); 
+  } else { 
+    $("#CL-pwd").attr('type', "password"); 
+    $("#newPwd").attr('type', "password"); 
+  }
+}
+
+
+
 $(document).ready(function() {
-  $("#page-btn").click(ToggleTab);
+  $("#genPwd").click(ToggleGen);
+  $("#dash").click(ToggleDash);
   load("home"); 
 });
 

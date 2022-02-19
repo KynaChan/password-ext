@@ -5,31 +5,31 @@
 
 
 [catlocker] ::selection{
-    background-color:rgb(255, 227, 70);
+    background-color:rgb(248, 241, 201);
 }
 
 
 /* width */
 [catlocker] ::-webkit-scrollbar {
-    width: 5px;
+    width: 7px;
 }
   
 /* Track */
 [catlocker] ::-webkit-scrollbar-track {
     box-shadow: none;
     border-radius: 10px;
-    margin: 5px;
+    margin: 0 20px;
 }
 
 /* Handle */
 [catlocker] ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.315); 
+    background: rgba(247, 89, 71, 0.5); 
     border-radius: 10px;
 }
 
 /* Handle on hover */
 [catlocker] ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.726); 
+    background: rgba(247, 89, 71, 0.945);  
 }
 
 body[catlocker] ::placeholder {
@@ -62,7 +62,7 @@ body[catlocker]
 [catlocker] .content {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 13px;
     height: fit-content;
 }
 
@@ -79,11 +79,17 @@ body[catlocker]
     height: 50px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     padding-inline: 20px;
+    justify-content: space-between;
+    
 }
 
+[catlocker] .head-box-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
 [catlocker] .inputBox {
     position: relative;
@@ -91,12 +97,12 @@ body[catlocker]
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    border-radius: 0.5rem;
+    border-radius: 8px;
     background-color:rgba(250,211,207,1);
-    box-shadow: 0.35rem 0.35rem 0.15rem rgba(247, 195, 189, 0.897);
+    box-shadow: 5.6px 5.6px 2.4px rgba(247, 195, 189, 0.897);
     color: rgba(228, 95, 80, 0.788);
     padding: 10px;
-    font-size: 1.3rem;
+    font-size: 20.8px;
     left: -2px;
 }
 
@@ -125,7 +131,7 @@ body[catlocker]
 [catlocker] .myapp-input:hover, .myapp-input:focus {
     border: none;
     transition: all .5s linear;
-    box-shadow: inset 0px 0px 10px  rgba(226, 59, 41, 0.616);
+    box-shadow: inset 0px 0px 15px  rgba(248, 136, 124, 0.925);
 }
 
 [catlocker] .saveButton {
@@ -139,6 +145,7 @@ body[catlocker]
     font-weight: bold;
     font-size: 15px;
     align-self: center;
+    cursor: pointer;
 }
 
 [catlocker] .saveButton:active {
@@ -150,27 +157,27 @@ body[catlocker]
     position: absolute;
     display: flex;
     flex-direction: column;
-    gap: 3px;
-    top: 100%;
+
+    gap: 4px;
     z-index: 99;
-    left: 0;
+    left: 0.2%;
+    top: 93%;
     width: 100%;
-    background: rgb(255, 168, 159);
-    border: solid 1px rgba(228, 95, 80, 0.788);
-    border-radius: 10px;
-    height: 200px;
+    height: 170px;
+
+    box-shadow: 5px 9px 8px rgba(194, 138, 133, 0.479);
+        /* -2px 8px 3.5px rgba(204, 143, 137, 0.705); */
+
+    background-color:rgba(250,211,207,1);
+    border-radius: 0 0 10px 10px;
     overflow: auto;
-    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.459);
-    padding: 5px;
-    font-weight: bold;
     font-size: 15px;
 }
 
 [catlocker] .drop-down-row {
-    color: white;
-    background: rgba(228, 95, 80, 0.418);
-    border-radius: 10px;
-    padding: 5px;
+    color: rgba(228, 95, 80, 0.788);
+    font-weight: 700;
+    padding: 5px 45px;
     cursor: pointer;
     user-select: none;
     overflow-wrap: break-word;
@@ -178,21 +185,23 @@ body[catlocker]
 
 [catlocker] .drop-down-row:hover {
     background: rgba(228, 95, 80, 0.178);
+    /* border-left: 3.3px solid rgba(228, 95, 80, 0.788); */
+    box-shadow: inset 15px 0 0 -11px rgba(228, 95, 80, 0.788);
 }
 
 
-[catlocker] .empty-url, #page-btn, #myappShowpwd, .material-icons-round{
+[catlocker] .empty-url, #eyeShow, .material-icons-round{
     cursor: pointer;
-    opacity: .8;
+    opacity: .7;
     user-select: none;
 }
 
-[catlocker] .empty-url:hover, #page-btn:hover, #myappShowpwd:hover, .material-icons-round:hover{
+[catlocker] .empty-url:hover, #eyeShow:hover, .material-icons-round:hover{
     opacity: 1;
 }
 
-[catlocker] .empty-url:active, #page-btn:active, #myappShowpwd:active, .material-icons-round:active{
-    transform: scaleY(0.9) scaleX(1.75) translateY(3px);
+[catlocker] .empty-url:active, #eyeShow:active, .material-icons-round:active{
+    transform: scaleY(.8) scaleX(1.15) ;
 }
 
 [catlocker] #page-btn {
@@ -200,27 +209,102 @@ body[catlocker]
 }
 
 
-[catlocker] .pwd-strength{
+/* Progress Bar */
+[catlocker] .message .pwd-strength{
+    width: 100%;
+    margin-top: 7px;
+}
+
+[catlocker] progress[value]{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background-color:white;
+    border-radius:  0 0 15px 15px;
+}
+
+[catlocker] progress[value]::-webkit-progress-bar{ background: transparent; }
+[catlocker] progress[value]::-webkit-progress-value{
     position: relative;
-    align-items: center;
-    justify-items: center;
-    width: 350;
-    color: rgba(197, 84, 71, 0.945);
+    width: 100%;
+    height: 15px;
+    background: rgba(228, 95, 80, 0.788);
+    border-radius:  0 0 15px 15px;
+    transition:all 0.5s;
+}
+
+[catlocker] progress[value]::-moz-progress-bar{ background: transparent; }
+[catlocker] progress[value]::-moz-progress-value{
+    position: relative;
+    width: 100%;
+    height: 15px;
+    background: rgba(228, 95, 80, 0.788);
+    border-radius:  0 0 15px 15px;
+    transition:all 0.5s;
+}
+/* 
+[catlocker]progress[value=0]::-webkit-progress-value{
+    background: red;
+    width: 20%;
+}
+[catlocker]progress[value=25]::-webkit-progress-value{
+    background:coral; 
+    width: 40%;
+}
+[catlocker]progress[value=50]::-webkit-progress-value{
+    background: rgb(255, 166, 0);
+    width: 60%;
+}
+[catlocker]progress[value=75]::-webkit-progress-value{
+    background: rgb(217, 255, 47); 
+    width: 80%;
+}
+[catlocker]progress[value=100]::-webkit-progress-value{
+    background: rgb(0, 177, 0); 
+    width: 100%;
+} */
+
+
+/* Strength check */
+[catlocker] .message {
+    margin-left: 3px;
+    z-index: 99;
+    width: 100%;
+    padding: 8px 0 0;
+    border-radius:  0 0 15px 15px;
+
+    background-color:rgba(247, 195, 189, 0.897);
+    box-shadow: 
+        /* inset 15px 0 10px 0 rgba(252, 170, 159, 0.705); */
+        inset 15px 0 50px -5px rgba(250, 154, 141, 0.836);
+
+    /* font-family: cursive; */
+    /* white-space: pre-wrap; */
+    /* word-wrap: break-word; */
     font-size: 15px;
-    font-family:cursive;
-    padding: 5px;
-    background:darkblue;
-    border-radius: 15px;
+    user-select: none;
 }
 
 
-[catlocker] .pwd-feedback {
-    color: rgba(200, 92, 80, 0.719);
-    width: 100%;
-    font-family: cursive;
-    padding: 8px;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+[catlocker] .red{
+    color: rgba(200, 92, 80, 0.877);
+}
+[catlocker] .red::before{
+    content: "\2717";
+    font-size: 18px;
+    margin: 0 5px 0 38px;
+}
+
+
+[catlocker] .green{
+    color: rgba(65, 179, 74, 0.877);
+    /* color: rgb(255, 227, 70); */
+}
+[catlocker] .green::before{
+    content: "\2713";
+    font-size: 18px;
+    margin: 0 8px 0 45px;
 }
 
 
