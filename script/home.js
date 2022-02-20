@@ -115,15 +115,14 @@ function saveData() {
   if (!urlInput.length) return alert("Enter a website.");
   if(!user.length) return alert("Enter an email or username.");
 
-
   console.log(`The website is: ${urlInput}`);
   console.log(`The userName is: ${user}`);
   console.log(`The password is: ${pwd}`);
 
-
   data = window.localStorage.getItem(urlInput) ? JSON.parse(window.localStorage.getItem(urlInput)): {}
   data[user] = pwd
   window.localStorage.setItem(urlInput, JSON.stringify(data));
+
   $("#CL-username").val("");
   $("#CL-pwd").val("");
 }
@@ -166,12 +165,27 @@ function updateUrlInput() {
 }
 
 
+function ImportFile(event) {
+  console.log("hi there, wanna upload?")
+  var readFile = new FileReader();
+  readFile.onload = SetData;
+  readFile.readAsText(event.target.files[0]);
+}
+
+function SetData(event){
+  // alert(event.target.result);
+  var loadFile = JSON.parse(event.target.result);
+
+  for( var url in loadFile)
+  { localStorage.setItem(url, JSON.stringify(loadFile[url])) }
+}
+
+
 
 function OnHomeLoaded()
 {
   console.log("HOME LOADED");
 
-  
   $("#eyeShow").click(pwdShow);
 
   $("#save-btn").click(saveData);
@@ -185,6 +199,9 @@ function OnHomeLoaded()
   $("#url-input").on('input', updateUrlInput);
 
   $("#CL-pwd").keyup(UpdateStrength);
+  // $("#upload").click(getFile);
+
+  $("#upload").change(function(e) {ImportFile(e);});
   // $("#CL-pwd").on("input",updatePwdInput);
 }
 

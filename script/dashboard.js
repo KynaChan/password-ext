@@ -1,28 +1,6 @@
 
 
-
-function ShowWebSearch()
-{
-  let webList = $(".dashboard-list");
-  $(".webRows").remove();
-  let value = $("#url-input").val();
-  for (var i=0; i < localStorage.length; i++)
-  {
-      let storeKey = localStorage.key(i);
-      if (value.length && !storeKey.includes(value)) continue;
-      webList.append(`<div class="inputBox webRows" id="row-${i}">${storeKey}</div>`);
-      $(`#row-${i}`).mousedown(function(storeKey){
-        $(".webRows").append(storeKey);
-      });
-  } 
-
-  if(!webList.children().length) {
-    webList.append(`<div class="inputBox webRows">No URLs found.</div>`);
-  }
-}
-
-
-
+// print stored web list
 function PopulateWebList()
 {
   $("#page-title").hide();
@@ -44,6 +22,7 @@ function PopulateWebList()
 }
 
 
+// print stored ac in a selected web
 function SelectedWeb(key)
 {
   let webList = $("#dashboard-list");
@@ -54,9 +33,9 @@ function SelectedWeb(key)
   $("#page-title").show();
   $("#url-box").hide();
 
-  $(".webRemoveBtn").click(() => { RemoveWeb(key); });
-
   let accounts = GetAccounts(key);
+
+  // not working with symbols in username
   for(var id in accounts)
   {
     let row =`<div class="boxColumn"><div class="inputBox accountRows" remove-${id}>${id}
@@ -69,6 +48,8 @@ function SelectedWeb(key)
   }
 }
 
+
+// remove an ac with pwd
 function RemoveUsername(webUrl, id)
 {
   let accounts = GetAccounts(webUrl);
@@ -77,6 +58,7 @@ function RemoveUsername(webUrl, id)
   $(`[remove-${id}]`).remove();
 }
 
+// remove a web with all ac
 function RemoveWeb(key)
 {
   localStorage.removeItem(key);
@@ -85,43 +67,69 @@ function RemoveWeb(key)
 }
 
 
-function getURL()
-{
-  for (var i = 0; i < localStorage.length; i++)
-  {
-      let storeKey = localStorage.key(i);
-      return storeKey;
-  }
-  return;
-}
 
-
-//get the current opened tab
+// get the current opened tab
 function CurrentTab(url) 
 {
   var splitCurrURL = url.split("/");
-  $(".tab").text(splitCurrURL[2]);
-  var storedURL = getURL();
-  if (!splitCurrURL[2].includes(storedURL)) { return; }
-  CheckAutoLogin(storedURL);
+  $("#tab").text(splitCurrURL[2]);
+  checkMatches(splitCurrURL[2]);
+}
 
+// check if current tab equals to stored url
+function checkMatches(url)
+{
+  for (var i = 0; i < localStorage.length; i++)
+  {
+    let storeKey = localStorage.key(i);
+    if (url.includes(storeKey))
+    {
+      console.log(url);
+      console.log(i, storeKey);
+      CheckLogin(storeKey);
+    }
+  }
 }
 
 
-function CheckAutoLogin (url)
+// check if the current tab is match to a chosen url
+function CheckLogin (url)
 {
   var pwdInput = $( "input:password");
   var userInput = $( "input:email")||$( "input[type='text']");
   var storedUser = (GetAccounts(url));
 
-  console.log("yayaa");
-  userInput.autocomplete({source: storedUser, autoFocus:true});
+  console.log("matchhh");
+  // userInput.autocomplete({source: storedUser, autoFocus:true});
   pwdInput.val(GetAccounts(url).val);
 
 }
 
 
 
+function SaveFile(name, text) {
+  var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  saveAs(blob, name);
+}
+
+function ExportData(){
+  console.log("hi there, wanna download?")
+
+  var allData = {};
+
+  for( i=0; i < localStorage.length; i++ )
+  {
+    let storeKey = localStorage.key(i);
+        accounts = GetAccounts(storeKey);
+    allData[storeKey] = accounts;
+  }
+  var today = new Date();
+  let month = today.getMonth()+1;
+  if (month < 10)
+  { month ="0" + month; }
+  let date = today.getDate();
+  SaveFile("CatLocker_backup_"+ month + date + ".json", JSON.stringify(allData));
+}
 
 
 
@@ -135,13 +143,13 @@ function OnDashBoardLoaded()
   $("#url-input").blur(BlurUrlInput);
   $("#url-input").on('input', PopulateDropDown);
   //$("#url-input").on('input', ShowWebSearch);
-  
+
+  $("#download").click(ExportData);
+
   chrome.tabs.getSelected(null, function(tab) {
     CurrentTab(tab.url);
   });
 
-
-    
   console.log("DASHBOARD LOADED");
 }
 

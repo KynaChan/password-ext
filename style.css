@@ -244,26 +244,12 @@ body[catlocker]
     transition:all 0.5s;
 }
 /* 
-[catlocker]progress[value=0]::-webkit-progress-value{
     background: red;
-    width: 20%;
-}
-[catlocker]progress[value=25]::-webkit-progress-value{
     background:coral; 
-    width: 40%;
-}
-[catlocker]progress[value=50]::-webkit-progress-value{
     background: rgb(255, 166, 0);
-    width: 60%;
-}
-[catlocker]progress[value=75]::-webkit-progress-value{
     background: rgb(217, 255, 47); 
-    width: 80%;
-}
-[catlocker]progress[value=100]::-webkit-progress-value{
     background: rgb(0, 177, 0); 
-    width: 100%;
-} */
+*/
 
 
 /* Strength check */
@@ -275,9 +261,7 @@ body[catlocker]
     border-radius:  0 0 15px 15px;
 
     background-color:rgba(247, 195, 189, 0.897);
-    box-shadow: 
-        /* inset 15px 0 10px 0 rgba(252, 170, 159, 0.705); */
-        inset 15px 0 50px -5px rgba(250, 154, 141, 0.836);
+    box-shadow: inset 15px 0 50px -5px rgba(250, 154, 141, 0.836);
 
     /* font-family: cursive; */
     /* white-space: pre-wrap; */
@@ -307,5 +291,44 @@ body[catlocker]
     margin: 0 8px 0 45px;
 }
 
+
+[catlocker] .note{
+    font-size: 15px;
+    font-weight: 600;
+    text-align: left;
+    margin-top: -17px;
+    padding-left: 8px;
+    margin-bottom: 6px;
+    color: rgb(200, 92, 80);
+}
+
+[catlocker] .loadBtn{
+    opacity: .7;
+    cursor: pointer;
+    font-weight: 700;
+    user-select: none;
+    padding-left: 7px;
+    color: rgba(230, 64, 46, 0.979);
+
+}
+
+[catlocker] .loadBtn:hover{
+    opacity: 1;
+    text-decoration: underline;
+}
+[catlocker] .loadBtn:focus{
+    font-weight: 800;
+}
+
+[catlocker] .material-icons-outlined{
+    position: relative;
+    top: 4px;
+    right: 3px;
+}
+
+
+[catlocker] input[type="file"] {
+    display: none;
+}
 
 

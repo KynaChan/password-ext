@@ -1,16 +1,15 @@
 
 <div id="dashboard" class="content">
 
-    <div class="inputBox" id="url-box"  >
-        <div class="fa fa-link"></div>
-        <input 
-            placeholder="URL.."
-            id="url-input" 
-            type="text" 
-            spellcheck="false"
-            class="myapp-input" />
-        <div class="fa fa-times empty-url"></div>
+    <div class="note">Want a backup of your accounts?
+        <label class="loadBtn" id="download"><a ></a>
+            <span>Export data <span class="material-icons-outlined">file_download</span></span>
+        </label>
     </div>
+
+
+
+
     <div class="inputBox" id="page-title">
         
         <span id="page-title-btn" class="material-icons-round" >arrow_back</span>
@@ -21,7 +20,7 @@
 
     <div class="currTab">
         <b class="pageText" style="font-size: 16px; padding-left: 10px; opacity: .9;">Current page</b>
-        <div class="tab" style="margin:0px 0px 5px 25px;font-weight: bold;"></div>
+        <div id="tab" style="margin:0px 0px 5px 25px;font-weight: bold;"></div>
     </div>
 
     <div id="dashboard-list"></div>
@@ -107,6 +106,10 @@
 }
 
 [catlocker] .accountPwd{
+
+    width: 350px;
+    padding-left: 17px;
+    word-break:break-all;
 
     display: none;
     padding: 10px;
