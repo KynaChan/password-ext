@@ -1,6 +1,5 @@
-# password-ext
-## Project title: 
-password-account management system - the CatLocker
+# Password-account management system
+### Project title: password-ext - the CatLocker
 
 ### Project vision: 
    * CatLocker is a web page to store usernames and test password strength for businesses, office workers and the majority of computer users.  
