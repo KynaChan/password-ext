@@ -3,22 +3,28 @@
 function checkPwd(pwd)
 {
   let strength = 0;
+  strength += checkLength(pwd);
+  strength += checkRepeatChar(pwd);
+  strength += checkCapital(pwd);
+  strength += checkNumber(pwd);
+  strength += checkSymbol(pwd);
+  return strength;
+}
 
-
-// check length
+function checkLength(pwd)
+{
   if (pwd.length >= 8)
   {
-    strength+=20; 
-    $("#length").addClass("green");
+    addGreen($("#length"));
+    return 20;
+  } else { 
+    addRed($("#length"));
+    return 0;
   }
-  else
-  {
-    $("#length").removeClass("green");
-    $("#length").addClass("red");
-  }
+}
 
-
-// check repeat char
+function checkRepeatChar(pwd)
+{
   let chFound = 0;
   for (let i = 0; i < pwd.length; i++) 
   {
@@ -27,68 +33,66 @@ function checkPwd(pwd)
   }
   if(chFound < 2) 
   {
-    strength+=20;
-    $("#repeat").addClass("green");
+    addGreen($("#repeat"));
+    return 20;
+  } else { 
+    addRed($("#repeat"));
+    return 0;
   }
-  else
-  {
-    $("#repeat").removeClass("green");
-    $("#repeat").addClass("red");
-  }
+}
 
-
-
-// check capital
+function checkCapital(pwd)
+{
   let cap = /[A-Z]+/;
 
   if (pwd.match(cap)) 
   {
-    strength+=20;
-    $("#capital").addClass("green");
+    addGreen($("#capital"));
+    return 20;
+  } else { 
+    addRed($("#capital"));
+    return 0;
   }
-  else
-  {
-    $("#capital").removeClass("green");
-    $("#capital").addClass("red");
-  }
+}
 
-
-  
-// check number
+function checkNumber(pwd)
+{
   let num = /[0-9]+/;
 
   if (pwd.match(num))
   {
-    strength+=20;  
-    $("#number").addClass("green");
+    addGreen($("#number"));
+    return 20;
+  } else { 
+    addRed($("#number"));
+    return 0;
   }
-  else
-  {
-    $("#number").removeClass("green");
-    $("#number").addClass("red");
-  }
+}
 
-
-
-// check symbol
+function checkSymbol(pwd)
+{
   let sym = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 
   if (pwd.match(sym)) 
   {
-    strength+=20; 
-    $("#symbol").addClass("green");
+    addGreen($("#symbol"));
+    return 20;
+  } else { 
+    addRed($("#symbol"));
+    return 0;
   }
-  else
-  {
-    $("#symbol").removeClass("green");
-    $("#symbol").addClass("red");
-  }
-
-
-  return strength;
 }
 
-
+// change color
+function addRed(id)
+{
+  id.removeClass("green");
+  id.addClass("red");
+}
+function addGreen(id)
+{
+  id.addClass("green");
+}
 
 
 function UpdateStrength()
@@ -96,41 +100,29 @@ function UpdateStrength()
   let pwd = $("#CL-pwd").val();
   let strength = checkPwd(pwd);
 
-  // console.log(strength);
   $("#meter").attr("value", strength);
 }
 
 
-function updatePwdInput()
-{
-  UpdateStrength();
-}
-
-
 function saveData() {
-  const user = $("#CL-username").val();
+  const urlInput = $("#url-input").val().trim();
+  const user = $("#CL-username").val().trim();
   const pwd =  $("#CL-pwd").val();
-  const urlInput = $("#url-input").val();
-
-  if (!urlInput.length) return alert("Enter a website.");
-  if(!user.length) return alert("Enter an email or username.");
 
   console.log(`The website is: ${urlInput}`);
   console.log(`The userName is: ${user}`);
   console.log(`The password is: ${pwd}`);
 
-  data = window.localStorage.getItem(urlInput) ? JSON.parse(window.localStorage.getItem(urlInput)): {}
+  data = window.localStorage.getItem(urlInput) ? JSON.parse(decrypt(window.localStorage.getItem(urlInput))): {}
   data[user] = pwd
-  window.localStorage.setItem(urlInput, JSON.stringify(data));
-
-  $("#CL-username").val("");
-  $("#CL-pwd").val("");
+  window.localStorage.setItem(urlInput, encrypt(JSON.stringify(data)));
 }
 
 
 function SelectUrl(url) {
   $("#url-input").val(url);
 }
+
 
 function PopulateDropDown()
 {
@@ -140,14 +132,14 @@ function PopulateDropDown()
   for (var i=0; i < localStorage.length; i++)
   {
       let storeKey = localStorage.key(i);
-      //if(i == 5) break;
-      if (value.length && !storeKey.includes(value)) continue;
+
+      if (value.length && !storeKey.includes(value) || storeKey.includes("security_pin")) continue;
       dropDown.append(`<div class="drop-down-row" id="d-row-${i}">${storeKey}</div>`);
       $(`#d-row-${i}`).mousedown(() => SelectUrl(storeKey));
-  } 
+  }
 
   if(!dropDown.children().length) {
-      dropDown.append(`<div class="drop-down-row">No URLs found.</div>`);
+      dropDown.append(`<div class="drop-down-row">${value}</div>`);
   }
 }
 
@@ -177,7 +169,7 @@ function SetData(event){
   var loadFile = JSON.parse(event.target.result);
 
   for( var url in loadFile)
-  { localStorage.setItem(url, JSON.stringify(loadFile[url])) }
+  { localStorage.setItem(url, encrypt( JSON.stringify(loadFile[url])) ) }
 }
 
 
@@ -186,23 +178,16 @@ function OnHomeLoaded()
 {
   console.log("HOME LOADED");
 
-  $("#eyeShow").click(pwdShow);
-
-  $("#save-btn").click(saveData);
-  $("#CL-pwd").keypress(function (e){
-    if(e.which == 13){$("#save-btn").click();}
-  });
-
   $(".empty-url").click(() => SelectUrl(''));
   $("#url-input").focus(FocusUrlInput);
   $("#url-input").blur(BlurUrlInput);
   $("#url-input").on('input', updateUrlInput);
 
   $("#CL-pwd").keyup(UpdateStrength);
-  // $("#upload").click(getFile);
+  $("#eyeShow").click(pwdShow);
+  $("#save-btn").click(saveData);
 
   $("#upload").change(function(e) {ImportFile(e);});
-  // $("#CL-pwd").on("input",updatePwdInput);
 }
 
 

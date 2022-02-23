@@ -5,6 +5,12 @@ let DATA = {
   title: "CatLocker",
   page: "home",
   pages: {
+    
+    "register": {
+      onload: OnRegisterLoaded,
+      title: "Welcome!"
+    },
+
     "home": {
       onload: OnHomeLoaded,
       title: "Home",
@@ -13,7 +19,6 @@ let DATA = {
     "dashboard": {
       onload: OnDashBoardLoaded,
       title: "Dashboard",
-      selfIcon: "space_dashboard",
       label: "meeting_room",
       id:"dash"
     },
@@ -21,22 +26,26 @@ let DATA = {
     "generator": {
       onload: OnGeneratorLoaded,
       title: "Generator",
-      selfIcon: "enhanced_encryption",
       label: "meeting_room",
       id:"genPwd"
-    }
+     }
+
   }
 } 
 
+
+
 function GetAccounts(url)
 {
-  return JSON.parse(localStorage.getItem(url));
+  return JSON.parse(decrypt(localStorage.getItem(url)));
 }
 
 function SetAccounts(url, dict)
 {
-  localStorage.setItem(url, JSON.stringify(dict));
+  localStorage.setItem(url, encrypt(JSON.stringify(dict)));
 }
+
+
 
 function load(page) {
   let pageData = DATA.pages[page];
@@ -49,6 +58,25 @@ function load(page) {
   DATA.page = page;
 }
 
+
+function ToggleReg() 
+{
+  if(localStorage.getItem("security_pin"))
+  { 
+    load("home")
+    $("#dash").show();
+    $("#genPwd").show();
+  }
+  else
+  {
+    load ("register");
+    $("#dash").hide();
+    $("#genPwd").hide();
+  }
+}
+
+
+// hide button
 function ToggleGen()
 {
   if(DATA.page != "generator") {
@@ -63,6 +91,8 @@ function ToggleGen()
   }
 }
 
+
+// hide button
 function ToggleDash()
 {
   if(DATA.page != "dashboard") {
@@ -77,6 +107,7 @@ function ToggleDash()
 }
 
 
+// show password
 function pwdShow(){
   if( $("#CL-pwd").attr('type') == "password" || $("#newPwd").attr('type') == "password" )
   { 
@@ -88,11 +119,29 @@ function pwdShow(){
   }
 }
 
+function SaveFile(name, text) {
+  var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  saveAs(blob, name);
+}
+
+
+function encrypt(message = '', key = ''){
+  var message = CryptoJS.AES.encrypt(message, key);
+  return message.toString();
+}
+
+function decrypt(message = '', key = ''){
+  var code = CryptoJS.AES.decrypt(message, key);
+  var decryptedMessage = code.toString(CryptoJS.enc.Utf8);
+
+  return decryptedMessage;
+}
+
 
 
 $(document).ready(function() {
+  ToggleReg();
   $("#genPwd").click(ToggleGen);
   $("#dash").click(ToggleDash);
-  load("home"); 
 });
 

@@ -1,5 +1,4 @@
 
-
 // print stored web list
 function PopulateWebList()
 {
@@ -12,50 +11,61 @@ function PopulateWebList()
  
   for (var i = 0; i < localStorage.length; i++)
   {
-      let storeKey = localStorage.key(i);
+    let storeKey = localStorage.key(i);
+    if (storeKey.includes("security_pin")) continue;
+      
+    webList.append(`<div class="inputBox webBox boxBorder"><label class="webRows" id="row-${i}">${storeKey}</label>
+      <span class="material-icons-round webRemoveBtn" id="webRemoveBtn-${i}" style="font-size: 30px;">delete_forever</span>
+    </div>`);
 
-      webList.append(`<div class="inputBox webRows" id="row-${i}">${storeKey} 
-        <span class="material-icons-round forMoreBtn" id='forMoreBtn-${i}'>more_horiz</span>
-      </div>`);
-      $(`#forMoreBtn-${i}`).on("click", () => SelectedWeb(storeKey));
-  } 
+    $(`#row-${i}`).on("click", () => SelectedWeb(storeKey));
+    $(`#webRemoveBtn-${i}`).on("click", () => RemoveWeb(storeKey))
+  }
 }
 
 
 // print stored ac in a selected web
 function SelectedWeb(key)
 {
-  let webList = $("#dashboard-list");
+  let webList = $("#dashboard-list"),
+      pageBox = $("#page-title");
+
   webList.empty();
   $(".currTab").hide();
 
+  pageBox.show();
   $("#page-title-label").text(key);
-  $("#page-title").show();
   $("#url-box").hide();
 
   let accounts = GetAccounts(key);
+  var buttonIndex = 0;
 
-  // not working with symbols in username
   for(var id in accounts)
   {
-    let row =`<div class="boxColumn"><div class="inputBox accountRows" remove-${id}>${id}
-      <span class="material-icons-round" button-remove-${id} style="font-weight:bold; font-size: 30px;">remove</span></div>
-    <div class="accountPwd" pwd-${id} >Password: ${accounts[id]}</div></div>`;
+    let row =`<div class="boxColumn"><div class="inputBox accountRows" remove-${buttonIndex}>${id}
+      <span class="material-icons-round" button-remove-${buttonIndex} style="font-weight:bold; font-size: 30px;">remove</span></div>
+    <div class="accountPwd" pwd-${buttonIndex} >Password: ${accounts[id]}</div></div>`;
+
+    // let linkBtn = `<span id="page-url-btn" class="material-icons-round" style="font-size: 30px; font-weight: bold;">link</span>`
 
     webList.append(row);
+    // pageBox.append(linkBtn);
+
     let t = id;
-    $(`[button-remove-${id}]`).click(() => { RemoveUsername(key, t); });
+    $(`[button-remove-${buttonIndex}]`).click(() => { RemoveUsername(buttonIndex, key, t); });
+
+    buttonIndex++;
   }
 }
 
-
 // remove an ac with pwd
-function RemoveUsername(webUrl, id)
+function RemoveUsername(buttonIndex, webUrl, id)
 {
   let accounts = GetAccounts(webUrl);
   delete accounts[id];
   SetAccounts(webUrl, accounts);
-  $(`[remove-${id}]`).remove();
+  $(`[remove-${buttonIndex}]`).remove();
+  SelectedWeb(webUrl);
 }
 
 // remove a web with all ac
@@ -65,7 +75,6 @@ function RemoveWeb(key)
   console.log(key)
   PopulateWebList();
 }
-
 
 
 // get the current opened tab
@@ -96,7 +105,7 @@ function checkMatches(url)
 function CheckLogin (url)
 {
   var pwdInput = $( "input:password");
-  var userInput = $( "input:email")||$( "input[type='text']");
+  var userInput = $( "input:email") || $( "input[type='text']");
   var storedUser = (GetAccounts(url));
 
   console.log("matchhh");
@@ -107,11 +116,6 @@ function CheckLogin (url)
 
 
 
-function SaveFile(name, text) {
-  var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
-  saveAs(blob, name);
-}
-
 function ExportData(){
   console.log("hi there, wanna download?")
 
@@ -120,7 +124,9 @@ function ExportData(){
   for( i=0; i < localStorage.length; i++ )
   {
     let storeKey = localStorage.key(i);
-        accounts = GetAccounts(storeKey);
+    if (storeKey.includes("security_pin")) continue;
+
+    let accounts = GetAccounts(storeKey);
     allData[storeKey] = accounts;
   }
   var today = new Date();
@@ -128,21 +134,67 @@ function ExportData(){
   if (month < 10)
   { month ="0" + month; }
   let date = today.getDate();
-  SaveFile("CatLocker_backup_"+ month + date + ".json", JSON.stringify(allData));
+  SaveFile("CatLocker_backup_"+ month + date + ".json", JSON.stringify(allData) );
+}
+
+
+
+function hideDash()
+{
+  $(".registerBox").show();
+  $(".note").hide();
+  $("#dashboard-list").hide();
+}
+function showDash()
+{
+  if (!checkPinExist()) { hideDash(); }
+  $(".registerBox").hide();
+  $(".note").show();
+  $("#dashboard-list").show();
+}
+
+function getPin()
+{
+  var inputPin = $("#dashPIN").val(),
+      hashInputPin = CryptoJS.SHA256(inputPin),
+      existPin = localStorage.security_pin;
+
+  if ( hashInputPin == existPin )
+  {
+    ramStorage.setItem('security_pin',hashInputPin);
+    showDash();
+    setPinTimeout();
+  }
+
+  let warning = `<b class="warning">Input PIN incorrect. Please try again.</b>`
+  $("#dashPIN").val("");
+  $(".registerBox").append(warning);
+}
+
+
+function checkPinExist()
+{
+  return(ramStorage.security_pin);
+}
+function setPinTimeout()
+{
+  const pinTimeout = setTimeout(clearPin, 10000);
+}
+function clearPin()
+{
+  ramStorage.removeItem( 'security_pin' );
 }
 
 
 
 function OnDashBoardLoaded()
 {
+  hideDash();
+  $("#pinSubmit").click(getPin);
+
+
   PopulateWebList();
   $("#page-title-btn").click(PopulateWebList);
-
-  $(".empty-url").click(() => SelectUrl(''));
-  $("#url-input").focus(FocusUrlInput);
-  $("#url-input").blur(BlurUrlInput);
-  $("#url-input").on('input', PopulateDropDown);
-  //$("#url-input").on('input', ShowWebSearch);
 
   $("#download").click(ExportData);
 

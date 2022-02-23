@@ -9,6 +9,7 @@
 }
 
 
+
 /* width */
 [catlocker] ::-webkit-scrollbar {
     width: 7px;
@@ -106,6 +107,11 @@ body[catlocker]
     left: -2px;
 }
 
+[catlocker] .boxBorder{
+    border: 3px white solid;
+}
+
+
 [catlocker] .passwordBox {
     position: relative;
     display:flex;
@@ -114,7 +120,7 @@ body[catlocker]
 }
 
 
-[catlocker] .myapp-input {
+[catlocker] .CL-input-field {
     margin: 0 0.5rem 0 0.5rem;
     width: 100%;
     border: none;
@@ -128,7 +134,7 @@ body[catlocker]
 
 }
 
-[catlocker] .myapp-input:hover, .myapp-input:focus {
+[catlocker] .CL-input-field:hover, .CL-input-field:focus {
     border: none;
     transition: all .5s linear;
     box-shadow: inset 0px 0px 15px  rgba(248, 136, 124, 0.925);
@@ -255,17 +261,14 @@ body[catlocker]
 /* Strength check */
 [catlocker] .message {
     margin-left: 3px;
-    z-index: 99;
+    margin-top: -13px;
     width: 100%;
     padding: 8px 0 0;
     border-radius:  0 0 15px 15px;
 
     background-color:rgba(247, 195, 189, 0.897);
-    box-shadow: inset 15px 0 50px -5px rgba(250, 154, 141, 0.836);
+    box-shadow: inset 15px 0 30px -5px rgba(250, 154, 141, 0.856);
 
-    /* font-family: cursive; */
-    /* white-space: pre-wrap; */
-    /* word-wrap: break-word; */
     font-size: 15px;
     user-select: none;
 }
@@ -332,3 +335,49 @@ body[catlocker]
 }
 
 
+/* register page */
+[catlocker] .register{
+    font-size: 20px;
+    color: rgba(228, 95, 80, 0.788);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+[catlocker] .registerBox{
+    font-size: 23px;
+    display:flex;
+    flex-direction: column;
+    border-radius: 8px;
+    background-color:rgba(250,211,207,1);
+    box-shadow: 5.6px 5.6px 2.4px rgba(247, 195, 189, 0.897);
+    padding: 10px 15px;
+    margin: 13px 5px;
+}
+
+
+[catlocker] .PINBox{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 8px 0;
+    gap: 10px;
+}
+
+
+[catlocker] .submitBtn{
+    width: 70px;
+    border-radius: 50px;
+    background: rgb(252, 246, 245);
+    padding: 10px;
+    box-shadow: 2px 3px 1px rgba(240, 156, 146, 0.979);
+    border: none;
+    align-self: center;
+    cursor: pointer;
+}
+
+[catlocker] .submitBtn:active {
+    box-shadow: none;
+    transform: translateY(2px);
+}
+/* register end */

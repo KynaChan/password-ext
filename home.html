@@ -1,32 +1,41 @@
+<form>
+  <div id="home" class="content">
 
-<div id="home" class="content">
-  <div class="inputBox" id="url-box">
-    <div class="fa fa-link"></div>
-      <input 
-        placeholder="URL / Application"
-        id="url-input" 
-        type="text" 
+    <div class="inputBox" id="url-box">
+      <div class="fa fa-link"></div>
+        <input
+          placeholder="URL / Application"
+          class="CL-input-field"
+          spellcheck="false"
+          id="url-input"
+          type="text"
+          required/>
+        <div class="fa fa-times empty-url"></div>
+    </div>
+
+    <div class="inputBox" >
+      <div class="fa fa-user"></div>
+      <input
+        placeholder="User Name"
+        class="CL-input-field"
         spellcheck="false"
-        class="myapp-input" />
-      <div class="fa fa-times empty-url"></div>
-  </div>
+        id="CL-username"
+        type="text"
+        required/>
+    </div>
 
-
-  <div class="inputBox" >
-    <div class="fa fa-user"></div>
-    <input placeholder="User Name" spellcheck="false" id="CL-username" class="myapp-input" type="text"/>
-  </div>
-
-
-  <div class="pwd">
-
-    <!-- symbols still not allow, remove Btn not working, accountRows didnt refresh
-         username test: @mail.com -->
     <div class="inputBox">
       <div class="fa fa-lock"></div>
-      <input  placeholder="Password" id="CL-pwd" class="myapp-input" type="password"/>
+      <input
+        placeholder="Password"
+        class="CL-input-field"
+        spellcheck="false"
+        type="password"
+        id="CL-pwd"
+        required/>
       <div class="fa fa-eye" id="eyeShow"></div>
     </div>
+
     <div class="message">
       <b class="red" id="repeat" >Without repeating characters twice<br></b>
       <b class="red" id="length" >Minimum 8 characters<br></b>
@@ -34,17 +43,17 @@
       <b class="red" id="number" >Numbers<br></b>
       <b class="red" id="symbol" >Symbols<br></b>
       <progress class="pwd-strength" id="meter" min="0" max="100" value="0"></progress>
-
     </div>
 
-  </div>
+    <div class="note">Want to import your own backup?
+      <label class="loadBtn" id="upload">
+        <input type="file" accept="application/json"/>
+        <span>Import file <span class="material-icons-outlined">file_upload</span></span>
+      </label>
+    </div>
 
-  <div class="note">Want to import your own backup?
-    <label class="loadBtn" id="upload"><input type="file" accept="application/json"/>
-      <span>Import file <span class="material-icons-outlined">file_upload</span></span>
-    </label>
-  </div>
+    <button type="submit" id="save-btn" class="saveButton">Save Data</button>
 
-  <button id="save-btn" class="saveButton">Save Data</button>
-    
-</div>
+
+  </div>
+</form>

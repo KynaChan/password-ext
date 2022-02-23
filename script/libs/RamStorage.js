@@ -1,0 +1,1 @@
+class RamStorage{constructor(){return this.storage={},new Proxy(this,{get:function(t,e){return e in t?t[e]:e in t.storage?t.storage[e]:void 0}})}setItem(t,e){this.storage[t]=e}getItem(t){return this.storage[t]}removeItem(t){delete this.storage[t]}}window.ramStorage=new RamStorage;

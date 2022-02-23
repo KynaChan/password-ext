@@ -7,20 +7,37 @@
         </label>
     </div>
 
-
-
-
-    <div class="inputBox" id="page-title">
+    <div class="inputBox boxBorder" id="page-title">
         
         <span id="page-title-btn" class="material-icons-round" >arrow_back</span>
         <label id="page-title-label">VALUE</label>
-        <span class="material-icons-round webRemoveBtn" style="font-size: 30px;">delete_forever</span>
+        <div></div>
         
     </div>
 
     <div class="currTab">
         <b class="pageText" style="font-size: 16px; padding-left: 10px; opacity: .9;">Current page</b>
         <div id="tab" style="margin:0px 0px 5px 25px;font-weight: bold;"></div>
+    </div>
+
+<!-- PIN -->
+    <div class="registerBox" style="color: rgba(228, 95, 80, 0.788);">
+        <b>Enter your PIN. <div class="fas fa-cat"></div></b>
+
+    <!-- <form id="dashForm"> -->
+        <div class="PINBox">
+            <label for="pin"> <div class="fas fa-id-card-alt"></div> </label>
+            <input placeholder="PIN.."
+                spellcheck="false"
+                id="dashPIN"
+                class="CL-input-field"
+                type="text"
+                minlength="5"
+                style="border: 3px solid white; text-align: center;"
+                required/>
+            <button class="submitBtn" id="pinSubmit">✔️</button>
+        </div>
+    <!-- </form> -->
     </div>
 
     <div id="dashboard-list"></div>
@@ -30,27 +47,7 @@
 
 <style>
 
-
-/*  shows when hover 
-    box-shadow: [X] [Y] [blur] [only one side] [color];
-*/
-[catlocker] .forMoreBtn {
-    display: none;
-    font-size: 30px;
-    font-weight: bold;
-    padding-left: 5px;
-    border-left: 4px solid white;
-}
-
-[catlocker] .webRows:hover .forMoreBtn{
-    display: block;
-}
-
-[catlocker] .webRows:hover {
-    box-shadow: inset 15px 0 0 -11px rgba(228, 95, 80, 0.61);
-}
-
-
+/*  box-shadow: [X] [Y] [blur] [only one side] [color];  */
 /* current tab box */
 [catlocker] .currTab{
     right: 2px;
@@ -68,6 +65,13 @@
     text-overflow: ellipsis;
     white-space:nowrap; */
 }
+
+[catlocker] .warning{
+    text-align: center;
+    font-size: 15px;
+    color: rgba(255, 0, 0, 0.733);
+}
+
 
 
 /* selected web title box */
@@ -102,7 +106,6 @@
     margin-top: 6px;
     border-left: 3.5px solid rgba(228, 95, 80, 0.61);
     border-top: 3.5px solid rgba(228, 95, 80, 0.61);
-    /* box-shadow: 15px 0 4px -5px white; */
 }
 
 [catlocker] .accountPwd{
@@ -116,13 +119,11 @@
     font-size: 18px;
     font-weight: 640;
     margin-left: 1.5px;
-    /* margin-bottom: 5px; */
     border-radius: 0 0 8px 8px;
 
     color: rgba(200, 92, 80, 0.877);
     background-color:rgba(247, 195, 189, 0.897);
     border-left: 3.5px solid rgba(228, 95, 80, 0.61);
-    /* box-shadow: 0 3px 4px rgba(247, 195, 189, 0.897); */
 }
 
 [catlocker] .boxColumn{
@@ -146,13 +147,35 @@
 
 [catlocker] .webRows{
     font-weight: 635;
-    padding-left: 17px;
+    padding: 0 10px;
     font-family: cursive;
     word-break:break-all;
+    width: 300px;
+
+}
+[catlocker] .webRows:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
+[catlocker] .webRemoveBtn {
+    display: none;
+    font-size: 30px;
+    padding-left: 5px;
+}
 
+[catlocker] .webBox:hover .webRemoveBtn{
+    display: block;
+}
 
+[catlocker] .webBox:hover{
+    box-shadow: inset 15px 0 0 -10px rgba(228, 95, 80, 0.61);
+}
+
+[catlocker] .webBox:hover .webRows{
+    border-right: 4px solid white;
+
+}
 
 </style>
 
