@@ -349,7 +349,7 @@ body[catlocker]
     display:flex;
     flex-direction: column;
     border-radius: 8px;
-    background-color:rgba(250,211,207,1);
+    background-color:rgb(250,211,207);
     box-shadow: 5.6px 5.6px 2.4px rgba(247, 195, 189, 0.897);
     padding: 10px 15px;
     margin: 13px 5px;
@@ -360,7 +360,7 @@ body[catlocker]
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 8px 0;
+    margin: 6px 3px;
     gap: 10px;
 }
 

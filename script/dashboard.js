@@ -166,8 +166,10 @@ function getPin()
     setPinTimeout();
   }
 
-  let warning = `<b class="warning">Input PIN incorrect. Please try again.</b>`
+  let warning = `<b class="warning"><span class="material-icons-outlined">report_gmailerrorred</span>Wrong PIN. Please try again.</b>`
   $("#dashPIN").val("");
+
+  if ($(".warning").length) return;
   $(".registerBox").append(warning);
 }
 
@@ -190,6 +192,11 @@ function clearPin()
 function OnDashBoardLoaded()
 {
   hideDash();
+
+  $("#dashPIN").keypress(function(event) {
+    if (event.keyCode === 13) {
+        $("#pinSubmit").click();}});
+
   $("#pinSubmit").click(getPin);
 
 
