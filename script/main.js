@@ -119,6 +119,15 @@ function pwdShow(){
   }
 }
 
+
+function TogglePasswordView(id) {
+  let passwordInput = $(id);
+  let typeAttrVal = passwordInput.attr("type");
+  let newType = typeAttrVal == "text" ? "password": "text";
+
+  passwordInput.attr("type", newType);
+}
+
 function SaveFile(name, text) {
   var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
   saveAs(blob, name);

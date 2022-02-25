@@ -104,7 +104,9 @@ function UpdateStrength()
 }
 
 
-function saveData() {
+function saveData(event) {
+  event.preventDefault();
+  
   const urlInput = $("#url-input").val().trim();
   const user = $("#CL-username").val().trim();
   const pwd =  $("#CL-pwd").val();
@@ -112,6 +114,10 @@ function saveData() {
   console.log(`The website is: ${urlInput}`);
   console.log(`The userName is: ${user}`);
   console.log(`The password is: ${pwd}`);
+
+  let webPage = new PageTemplate(urlInput);
+  webPage.SetAccount(user, pwd);
+  webPage.SaveToStorage();
 
   data = window.localStorage.getItem(urlInput) ? JSON.parse(decrypt(window.localStorage.getItem(urlInput))): {}
   data[user] = pwd
@@ -185,7 +191,7 @@ function OnHomeLoaded()
 
   $("#CL-pwd").keyup(UpdateStrength);
   $("#eyeShow").click(pwdShow);
-  $("#save-btn").click(saveData);
+  $("#save-form").on('submit', saveData);
 
   $("#upload").change(function(e) {ImportFile(e);});
 }
