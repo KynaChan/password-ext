@@ -109,15 +109,19 @@ function ToggleDash()
 
 // show password
 function pwdShow(){
-  if( $("#CL-pwd").attr('type') == "password" || $("#newPwd").attr('type') == "password" )
-  { 
-    $("#CL-pwd").attr('type', "text"); 
-    $("#newPwd").attr('type', "text"); 
-  } else { 
-    $("#CL-pwd").attr('type', "password"); 
-    $("#newPwd").attr('type', "password"); 
-  }
+  TogglePwdShow("CL-pwd");
+  TogglePwdShow("newPwd");
 }
+
+function TogglePwdShow(id=""){
+  let passwordInput = $(`#${id}`);
+  let typeAttrVal = passwordInput.attr("type");
+  let newType = typeAttrVal == "text" ? "password": "text";
+
+  passwordInput.attr("type", newType);
+}
+
+
 
 function SaveFile(name, text) {
   var blob = new Blob([text], { type: "text/plain;charset=utf-8" });

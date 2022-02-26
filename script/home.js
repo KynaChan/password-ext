@@ -84,14 +84,14 @@ function checkSymbol(pwd)
 }
 
 // change color
-function addRed(id)
+function addRed(eleId)
 {
-  id.removeClass("green");
-  id.addClass("red");
+  eleId.removeClass("green");
+  eleId.addClass("red");
 }
-function addGreen(id)
+function addGreen(eleId)
 {
-  id.addClass("green");
+  eleId.addClass("green");
 }
 
 
@@ -113,9 +113,9 @@ function saveData() {
   console.log(`The userName is: ${user}`);
   console.log(`The password is: ${pwd}`);
 
-  data = window.localStorage.getItem(urlInput) ? JSON.parse(decrypt(window.localStorage.getItem(urlInput))): {}
-  data[user] = pwd
-  window.localStorage.setItem(urlInput, encrypt(JSON.stringify(data)));
+  let page = new Page(urlInput);
+  page.SetAccount(user, pwd);
+  page.SaveToStorage();
 }
 
 
@@ -185,7 +185,7 @@ function OnHomeLoaded()
 
   $("#CL-pwd").keyup(UpdateStrength);
   $("#eyeShow").click(pwdShow);
-  $("#save-btn").click(saveData);
+  $("#save-form").click( saveData);
 
   $("#upload").change(function(e) {ImportFile(e);});
 }

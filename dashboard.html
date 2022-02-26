@@ -2,7 +2,7 @@
 <div id="dashboard" class="content">
 
     <div class="note">Want a backup of your accounts?
-        <label class="loadBtn" id="download"><a ></a>
+        <label class="loadBtn" id="download">
             <span>Export data <span class="material-icons-outlined">file_download</span></span>
         </label>
     </div>
@@ -10,15 +10,12 @@
     <div class="inputBox boxBorder" id="page-title">
         
         <span id="page-title-btn" class="material-icons-round" >arrow_back</span>
-        <label id="page-title-label">VALUE</label>
-        <div></div>
+        <label class="page-title-label"><div id="page-title-label">VALUE</div></label>
+        <span id="page-edit-btn" class="material-icons-round" style="font-size: 33px;">drive_file_rename_outline</span>
+        <span id="page-save-btn" class="material-icons-round" style="font-size: 33px;">save</span>
         
     </div>
 
-    <div class="currTab">
-        <b class="pageText" style="font-size: 16px; padding-left: 10px; opacity: .9;">Current page</b>
-        <div id="tab" style="margin:0px 0px 5px 25px;font-weight: bold;"></div>
-    </div>
 
 <!-- PIN -->
     <div class="registerBox" style="color: rgba(228, 95, 80, 0.788);">
@@ -32,6 +29,7 @@
                 id="dashPIN"
                 class="CL-input-field"
                 type="text"
+                autocomplete="off"
                 minlength="5"
                 style="border: 3px solid white; text-align: center;"
                 required/>
@@ -68,7 +66,7 @@
 
 [catlocker] .warning{
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
     color: rgba(255, 0, 0, 0.733);
 }
 
@@ -79,17 +77,18 @@
     font-size: 30px;
     font-weight: bold;
     padding-right: 8px;
+    margin-right: 10px;
     border-right: 2px solid rgba(228, 95, 80, 0.788);
 }
 
-[catlocker] #page-title-label{
+[catlocker] .page-title-label{
     width: 230px; 
     font-size: 24px;
     overflow: hidden;
     font-weight: 700;
     text-align: center;
-    white-space: nowrap; 
-    text-overflow: ellipsis; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 [catlocker] .accountRows{

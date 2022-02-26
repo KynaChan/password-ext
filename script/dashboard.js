@@ -1,10 +1,10 @@
 
+
 // print stored web list
 function PopulateWebList()
 {
   $("#page-title").hide();
-  $("#url-box").show();
-  $(".currTab").show();
+  // $(".currTab").show();
 
   let webList = $("#dashboard-list");
   webList.empty();
@@ -27,35 +27,38 @@ function PopulateWebList()
 // print stored ac in a selected web
 function SelectedWeb(key)
 {
-  let webList = $("#dashboard-list"),
-      pageBox = $("#page-title");
-
+  let webList = $("#dashboard-list");
   webList.empty();
-  $(".currTab").hide();
-
-  pageBox.show();
+  // $(".currTab").hide();
+  $("#page-title").show();
   $("#page-title-label").text(key);
-  $("#url-box").hide();
 
-  let accounts = GetAccounts(key);
+  let page = new Page(key);
+  let accounts = page.GetAccountsDict();
+  // let accounts = GetAccounts(key);
   var buttonIndex = 0;
 
   for(var id in accounts)
   {
-    let row =`<div class="boxColumn"><div class="inputBox accountRows" remove-${buttonIndex}>${id}
+    let row =`<div class="boxColumn">
+      <div class="inputBox accountRows" remove-${buttonIndex}>
+      <div id="accountRow">${id}</div>
       <span class="material-icons-round" button-remove-${buttonIndex} style="font-weight:bold; font-size: 30px;">remove</span></div>
-    <div class="accountPwd" pwd-${buttonIndex} >Password: ${accounts[id]}</div></div>`;
-
-    // let linkBtn = `<span id="page-url-btn" class="material-icons-round" style="font-size: 30px; font-weight: bold;">link</span>`
+      <div class="accountPwd" pwd-${buttonIndex}><div id="pwdRow">${accounts[id]}</div>
+    </div></div>`;
 
     webList.append(row);
-    // pageBox.append(linkBtn);
 
     let t = id;
     $(`[button-remove-${buttonIndex}]`).click(() => { RemoveUsername(buttonIndex, key, t); });
 
+    $("#page-save-btn").hide();
+    $("#page-edit-btn").click(TurnEdit);
+    $("#page-save-btn").click(TurnOffEdit);
+
     buttonIndex++;
   }
+
 }
 
 // remove an ac with pwd
@@ -74,6 +77,63 @@ function RemoveWeb(key)
   localStorage.removeItem(key);
   console.log(key)
   PopulateWebList();
+}
+
+
+
+// not finish
+function EditMode(id)
+{
+  $("#page-edit-btn").hide();
+  $("#page-save-btn").show();
+  let currInput = $(`#${id}`).text();
+
+  var input = $('<input />', {
+    'type': 'text',
+    'class': 'CL-input-field',
+    'id': (`new-${id}`),
+    'style': 'width: 250px',
+    'value': $(`#${id}`).text()
+});
+  $(`#${id}`).replaceWith(input);
+  console.log(currInput)
+}
+
+function TurnEdit()
+{
+  EditMode('page-title-label');
+  EditMode('accountRow');
+  EditMode('pwdRow');
+}
+
+function ExitEdit(id)
+{
+  $("#page-edit-btn").show();
+  $("#page-save-btn").hide();
+  let newInput = $(`#new-${id}`).val();
+
+  var div = $('<div>'+ newInput + '</div>', {
+    'id':(`${id}`),
+  });
+
+  $(`#new-${id}`).replaceWith(div);
+  console.log(newInput)
+}
+
+function TurnOffEdit()
+{
+  ExitEdit('page-title-label');
+  ExitEdit('accountRow');
+  ExitEdit('pwdRow');
+}
+
+function SaveModify()
+{
+  let val = GetInput();
+  localStorage.setItem(val);
+}
+
+function GetInput(){
 }
 
 
@@ -126,7 +186,8 @@ function ExportData(){
     let storeKey = localStorage.key(i);
     if (storeKey.includes("security_pin")) continue;
 
-    let accounts = GetAccounts(storeKey);
+    let page = new Page(storeKey);
+    let accounts = page.GetAccountsDict();
     allData[storeKey] = accounts;
   }
   var today = new Date();
@@ -166,7 +227,7 @@ function getPin()
     setPinTimeout();
   }
 
-  let warning = `<b class="warning"><span class="material-icons-outlined">report_gmailerrorred</span>Wrong PIN. Please try again.</b>`
+  let warning = `<b class="warning"><span class="material-icons-outlined" style="font-size: 20px;" >report_gmailerrorred</span>Wrong PIN. Please try again.</b>`
   $("#dashPIN").val("");
 
   if ($(".warning").length) return;
@@ -191,14 +252,16 @@ function clearPin()
 
 function OnDashBoardLoaded()
 {
-  hideDash();
+  // hideDash();
 
-  $("#dashPIN").keypress(function(event) {
-    if (event.keyCode === 13) {
-        $("#pinSubmit").click();}});
+  // $("#pinSubmit").click(getPin);
+  // $("#dashPIN").keypress(function(e) {
+  //   if (e.keyCode === 13) {
+  //     $("#pinSubmit").click();
+  //   }
+  // });
 
-  $("#pinSubmit").click(getPin);
-
+  showDash();
 
   PopulateWebList();
   $("#page-title-btn").click(PopulateWebList);
