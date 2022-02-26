@@ -29,7 +29,6 @@ function SelectedWeb(key)
 {
   let webList = $("#dashboard-list");
   webList.empty();
-  // $(".currTab").hide();
   $("#page-title").show();
   $("#page-title-label").text(key);
 
@@ -53,7 +52,7 @@ function SelectedWeb(key)
     $(`[button-remove-${buttonIndex}]`).click(() => { RemoveUsername(buttonIndex, key, t); });
 
     $("#page-save-btn").hide();
-    $("#page-edit-btn").click(TurnEdit);
+    $("#page-edit-btn").click(TurnOnEdit);
     $("#page-save-btn").click(TurnOffEdit);
 
     buttonIndex++;
@@ -90,16 +89,14 @@ function EditMode(id)
 
   var input = $('<input />', {
     'type': 'text',
-    'class': 'CL-input-field',
-    'id': (`new-${id}`),
+    'id': `new-${id}`,
+    'value': currInput,
     'style': 'width: 250px',
-    'value': $(`#${id}`).text()
+    'class': 'CL-input-field'
 });
   $(`#${id}`).replaceWith(input);
-  console.log(currInput)
 }
-
-function TurnEdit()
+function TurnOnEdit()
 {
   EditMode('page-title-label');
   EditMode('accountRow');
@@ -110,16 +107,13 @@ function ExitEdit(id)
 {
   $("#page-edit-btn").show();
   $("#page-save-btn").hide();
-  let newInput = $(`#new-${id}`).val();
+  let newInput = GetInput(id);
 
-  var div = $('<div>'+ newInput + '</div>', {
-    'id':(`${id}`),
-  });
+  var div = $('<div id=' + `${id}` + '>'+ newInput + '</div>');
 
   $(`#new-${id}`).replaceWith(div);
-  console.log(newInput)
+  SaveModify();
 }
-
 function TurnOffEdit()
 {
   ExitEdit('page-title-label');
@@ -129,11 +123,23 @@ function TurnOffEdit()
 
 function SaveModify()
 {
-  let val = GetInput();
-  localStorage.setItem(val);
+  let urlInput = GetInput('page-title-label');
+      user = GetInput('accountRow');
+      pwd = GetInput('pwdRow');
+  // aTrim = urlInput.trim();
+  // bTrim = user.trim();
+
+  let page = new Page(urlInput);
+  page.SetAccount(user, pwd);
+  page.SaveToStorage();
+
+  console.log(`website:` + urlInput);
+  console.log(`The userName + ${user}`);
+  console.log(`The password + ${pwd}`);
 }
 
-function GetInput(){
+function GetInput(id){
+  return $(`#new-${id}`).val();
 }
 
 
