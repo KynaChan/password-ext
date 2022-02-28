@@ -52,9 +52,9 @@ function SelectedWeb(key)
     $(`[button-remove-${buttonIndex}]`).click(() => { RemoveUsername(buttonIndex, key, t); });
 
     $("#page-save-btn").hide();
-    $("#page-edit-btn").click(TurnOnEdit);
-    $("#page-save-btn").click(TurnOffEdit);
-
+    $("#page-edit-btn").click(() => TurnOnEdit("page-title-label", "accountRow", "accountPwd"));
+    $("#page-save-btn").click(() => TurnOffEdit("page-title-label", "accountRow", "accountPwd"));
+    $("#page-title-btn").click(() => CheckEditMode("page-title-label", "accountRow", "accountPwd"));
     buttonIndex++;
   }
 
@@ -79,12 +79,12 @@ function RemoveWeb(key)
 }
 
 
-
 // not finish
 function EditMode(id)
 {
   $("#page-edit-btn").hide();
   $("#page-save-btn").show();
+
   let currInput = $(`#${id}`).text();
 
   var input = $('<input />', {
@@ -94,19 +94,31 @@ function EditMode(id)
     'style': 'width: 250px',
     'class': 'CL-input-field'
 });
+
   $(`#${id}`).replaceWith(input);
 }
-function TurnOnEdit()
+
+function CheckEditMode(urlId, accountId, pwdId)
 {
-  EditMode('page-title-label');
-  EditMode('accountRow');
-  EditMode('pwdRow');
+  if (!TurnOnEdit(urlId, accountId, pwdId)) return;
+  TurnOffEdit(urlId, accountId, pwdId);
+
+}
+
+
+function TurnOnEdit(urlId, accountId, pwdId)
+{
+  EditMode(urlId);
+  EditMode(accountId);
+  EditMode(pwdId);
+  return true;
 }
 
 function ExitEdit(id)
 {
   $("#page-edit-btn").show();
   $("#page-save-btn").hide();
+
   let newInput = GetInput(id);
 
   var div = $('<div id=' + `${id}` + '>'+ newInput + '</div>');
@@ -114,11 +126,12 @@ function ExitEdit(id)
   $(`#new-${id}`).replaceWith(div);
   SaveModify();
 }
-function TurnOffEdit()
+
+function TurnOffEdit(urlId, accountId, pwdId)
 {
-  ExitEdit('page-title-label');
-  ExitEdit('accountRow');
-  ExitEdit('pwdRow');
+  ExitEdit(urlId);
+  ExitEdit(accountId);
+  ExitEdit(pwdId);
 }
 
 function SaveModify()
@@ -129,13 +142,13 @@ function SaveModify()
   // aTrim = urlInput.trim();
   // bTrim = user.trim();
 
-  let page = new Page(urlInput);
-  page.SetAccount(user, pwd);
-  page.SaveToStorage();
+  // let page = new Page(urlInput);
+  // page.SetAccount(user, pwd);
+  // page.SaveToStorage();
 
-  console.log(`website:` + urlInput);
-  console.log(`The userName + ${user}`);
-  console.log(`The password + ${pwd}`);
+  console.log(urlInput);
+  console.log(`UserName: ${user}`);
+  console.log(`Password: ${pwd}`);
 }
 
 function GetInput(id){

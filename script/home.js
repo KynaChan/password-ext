@@ -158,18 +158,16 @@ function updateUrlInput() {
 
 
 function ImportFile(event) {
-  console.log("hi there, wanna upload?")
   var readFile = new FileReader();
   readFile.onload = SetData;
   readFile.readAsText(event.target.files[0]);
 }
 
 function SetData(event){
-  // alert(event.target.result);
   var loadFile = JSON.parse(event.target.result);
 
   for( var url in loadFile)
-  { localStorage.setItem(url, encrypt( JSON.stringify(loadFile[url])) ) }
+  { localStorage.setItem(url, JSON.stringify(loadFile[url])) }
 }
 
 
@@ -181,7 +179,7 @@ function OnHomeLoaded()
   $(".empty-url").click(() => SelectUrl(''));
   $("#url-input").focus(FocusUrlInput);
   $("#url-input").blur(BlurUrlInput);
-  $("#url-input").on('input', updateUrlInput);
+  $("#url-input").on('input', PopulateDropDown);
 
   $("#CL-pwd").keyup(UpdateStrength);
   $("#eyeShow").click(pwdShow);
