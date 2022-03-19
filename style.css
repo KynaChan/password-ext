@@ -100,9 +100,11 @@ body[catlocker]
     background-color:rgba(250,211,207,1);
     box-shadow: 5.6px 5.6px 2.4px rgba(247, 195, 189, 0.897);
     color: rgba(228, 95, 80, 0.788);
-    padding: 10px;
+    padding: 10px 15px;
     font-size: 20.8px;
     left: -2px;
+    border: 3px white solid;
+
 }
 
 [catlocker] .boxBorder{
@@ -119,7 +121,7 @@ body[catlocker]
 
 
 [catlocker] .CL-input-field {
-    margin: 0 0.5rem 0 0.5rem;
+    margin: 0 10px 0 15px;
     width: 100%;
     border: none;
     outline: none;
@@ -164,14 +166,12 @@ body[catlocker]
 
     gap: 4px;
     z-index: 99;
-    left: 0.2%;
+    left: .5%;
     top: 93%;
     width: 100%;
     height: 170px;
 
-    box-shadow: 5px 9px 8px rgba(194, 138, 133, 0.479);
-        /* -2px 8px 3.5px rgba(204, 143, 137, 0.705); */
-
+    box-shadow: 0 9px 8px rgba(194, 138, 133, 0.479);
     background-color:rgba(250,211,207,1);
     border-radius: 0 0 10px 10px;
     overflow: auto;
@@ -189,7 +189,6 @@ body[catlocker]
 
 [catlocker] .drop-down-row:hover {
     background: rgba(228, 95, 80, 0.178);
-    /* border-left: 3.3px solid rgba(228, 95, 80, 0.788); */
     box-shadow: inset 15px 0 0 -11px rgba(228, 95, 80, 0.788);
 }
 
@@ -286,7 +285,7 @@ body[catlocker]
 }
 
 
-[catlocker] .note{
+[catlocker] .question-box{
     font-size: 15px;
     font-weight: 600;
     text-align: left;
@@ -340,6 +339,7 @@ body[catlocker]
     display:flex;
     flex-direction: column;
     border-radius: 8px;
+    color: rgba(228, 95, 80, 0.788);
     background-color:rgb(250,211,207);
     box-shadow: 5.6px 5.6px 2.4px rgba(247, 195, 189, 0.897);
     padding: 10px 15px;

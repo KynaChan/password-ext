@@ -1,27 +1,15 @@
 
 <div id="dashboard" class="content">
 
-    <div class="note">Want a backup of your accounts?
+    <div class="question-box">Want a backup of your accounts?
         <label class="loadBtn" id="download">
             <span>Export data <span class="material-icons-outlined">file_download</span></span>
         </label>
     </div>
 
-    <div class="inputBox boxBorder" id="page-title">
-        
-        <span id="page-title-btn" class="material-icons-round" >arrow_back</span>
-        <label class="page-title-label"><div id="page-title-label">VALUE</div></label>
-        <span id="page-edit-btn" class="material-icons-round" style="font-size: 33px;">drive_file_rename_outline</span>
-        <span id="page-save-btn" class="material-icons-round" style="font-size: 33px;">save</span>
-        
-    </div>
-
-
 <!-- PIN -->
-    <div class="registerBox" style="color: rgba(228, 95, 80, 0.788);">
+    <form id="dash-Form" class="registerBox">
         <b style="text-align: center;">Enter your PIN.</b>
-
-    <!-- <form id="dashForm"> -->
         <div class="PINBox">
             <label for="pin"> <div class="fas fa-id-card-alt"></div> </label>
             <input placeholder="PIN.."
@@ -32,10 +20,16 @@
                 autocomplete="off"
                 minlength="5"
                 style="border: 3px solid white; text-align: center;"
-                required/>
+            autofocus required/>
             <button class="submitBtn" id="pinSubmit">✔️</button>
         </div>
-    <!-- </form> -->
+    </form>
+
+    <div class="inputBox boxBorder" id="page-title" style="padding: 3px 10px;">
+        <span id="go-back-btn" class="material-icons-round" >arrow_back</span>
+        <label class="page-title-label" id="page-title-label">VALUE</label>
+        <span id="page-key-btn" class="page-title-btn material-icons-round">key</span>
+        <span id="page-save-btn" class="page-title-btn material-icons-round">done</span>
     </div>
 
     <div id="dashboard-list"></div>
@@ -73,56 +67,71 @@
 
 
 /* selected web title box */
-[catlocker] #page-title-btn{
+[catlocker] #go-back-btn, .page-title-btn{
     font-size: 30px;
     font-weight: bold;
+}
+[catlocker] #go-back-btn{
     padding-right: 8px;
     margin-right: 10px;
     border-right: 2px solid rgba(228, 95, 80, 0.788);
 }
 
+[catlocker] .page-title-btn{
+    padding-left: 8px;
+    margin-left: 10px;
+    border-left: 2px solid rgba(228, 95, 80, 0.788);
+}
+
 [catlocker] .page-title-label{
-    width: 230px; 
+    width: 300px; 
     font-size: 24px;
     overflow: hidden;
     font-weight: 700;
+    padding: 10px;
     text-align: center;
     white-space: nowrap;
     text-overflow: ellipsis;
+
+    cursor: pointer;
 }
+[catlocker] .page-title-label:hover{
+    font-style: italic;
+}
+
 
 [catlocker] .accountRows{
     width: 350px;
     font-weight: 630;
     padding-left: 17px;
     word-break:break-all;
+    border: 3px white solid;
 }
 /* show selected aaccount pwd */
-[catlocker] .boxColumn:hover .accountPwd{
+[catlocker] .boxColumn:hover .pwd-input-field{
     display: block;
 }
 [catlocker] .boxColumn:hover .accountRows{
     margin-top: 6px;
-    border-left: 3.5px solid rgba(228, 95, 80, 0.61);
-    border-top: 3.5px solid rgba(228, 95, 80, 0.61);
+    border-radius: 11px 11px 0 0;
+    border-bottom-color: transparent;
 }
 
-[catlocker] .accountPwd{
-
-    width: 350px;
-    padding-left: 17px;
-    word-break:break-all;
-
+[catlocker] .pwd-input-field{
     display: none;
-    padding: 10px;
-    font-size: 18px;
-    font-weight: 640;
-    margin-left: 1.5px;
-    border-radius: 0 0 8px 8px;
 
-    color: rgba(200, 92, 80, 0.877);
-    background-color:rgba(247, 195, 189, 0.897);
-    border-left: 3.5px solid rgba(228, 95, 80, 0.61);
+    width: 100%;
+    border: 3px solid white;
+    border-top-color: transparent;
+
+    outline: none;
+    font-size: 20px;
+    padding: 7px;
+    border-radius: 0 0 11px 11px;
+    text-align: center;
+    font-weight: 600;
+    background: rgba(228, 95, 80, 0.4);
+    color: rgb(209, 54, 37);
 }
 
 [catlocker] .boxColumn{
@@ -130,7 +139,9 @@
     flex-direction: column;
 }
 
-
+[catlocker] .inputBox{
+    box-shadow: none;
+}
 
 /* web list */
 [catlocker] #dashboard-list {

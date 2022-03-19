@@ -18,22 +18,46 @@ class Page {
     }
 
     SaveToStorage()
-    { localStorage.setItem(this.appName, JSON.stringify(this.accounts)); }
-
+    {
+      localStorage.setItem(this.appName, JSON.stringify(this.accounts));
+    }
+    
     GetAccountsDict()
-    { return this.accounts; }
+    {
+      return this.accounts;
+    }
     GetPassword(userName)
-    { return this.accounts[userName]; }
+    {
+      return this.accounts[userName];
+    }
 
     SetAccountsDict(accountsDict)
-    { this.accounts = accountsDict; }
+    {
+      this.accounts = accountsDict;
+    }
 
-    SetAccount(userName, password)
-    { this.accounts[userName] = encrypt(password); }
+    SetAccount(userName, password, key)
+    {
+      this.accounts[userName] = encrypt(password); 
+    }
 
     AccountExists(userName) 
-    { return this.GetAccountPassword(userName) != undefined; }
+    {
+      return this.GetAccountPassword(userName) != undefined;
+    }
 
+
+    encrypt(message = '', key = ''){
+      var message = CryptoJS.AES.encrypt(message, key);
+      return message.toString();
+    }
+    
+    decrypt(message = '', key = ''){
+      var code = CryptoJS.AES.decrypt(message, key);
+      var decryptedMessage = code.toString(CryptoJS.enc.Utf8);
+    
+      return decryptedMessage;
+    }
 
 }
 

@@ -104,18 +104,28 @@ function UpdateStrength()
 }
 
 
-function saveData() {
-  const urlInput = $("#url-input").val().trim();
-  const user = $("#CL-username").val().trim();
-  const pwd =  $("#CL-pwd").val();
+function saveData(event)
+{
+  event.preventDefault();
 
-  console.log(`The website is: ${urlInput}`);
-  console.log(`The userName is: ${user}`);
-  console.log(`The password is: ${pwd}`);
+  const urlInput = $("#url-input");
+  const user = $("#CL-username");
+  const pwd =  $("#CL-pwd");
 
-  let page = new Page(urlInput);
-  page.SetAccount(user, pwd);
+  const urlInputVal = urlInput.val().trim();
+  const userVal = user.val().trim();
+  const pwdVal =  pwd.val();
+
+  console.log(`The website is: ${urlInputVal}`);
+  console.log(`The userName is: ${userVal}`);
+  console.log(`The password is: ${pwdVal}`);
+
+  let page = new Page(urlInputVal);
+  page.SetAccount(userVal, pwdVal);
   page.SaveToStorage();
+
+  user.val("");
+  pwd.val("");
 }
 
 
@@ -183,7 +193,7 @@ function OnHomeLoaded()
 
   $("#CL-pwd").keyup(UpdateStrength);
   $("#eyeShow").click(pwdShow);
-  $("#save-form").click( saveData);
+  $("#save-form").click(function(event) {saveData(event)});
 
   $("#upload").change(function(e) {ImportFile(e);});
 }

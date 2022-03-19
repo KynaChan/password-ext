@@ -37,12 +37,12 @@ let DATA = {
 
 function GetAccounts(url)
 {
-  return JSON.parse(decrypt(localStorage.getItem(url)));
+  return JSON.parse(localStorage.getItem(url));
 }
 
 function SetAccounts(url, dict)
 {
-  localStorage.setItem(url, encrypt(JSON.stringify(dict)));
+  localStorage.setItem(url, JSON.stringify(dict));
 }
 
 
