@@ -104,10 +104,8 @@ function UpdateStrength()
 }
 
 
-function saveData(event)
+function saveData()
 {
-  event.preventDefault();
-
   const urlInput = $("#url-input");
   const user = $("#CL-username");
   const pwd =  $("#CL-pwd");
@@ -124,8 +122,6 @@ function saveData(event)
   page.SetAccount(userVal, pwdVal);
   page.SaveToStorage();
 
-  user.val("");
-  pwd.val("");
 }
 
 
@@ -193,7 +189,7 @@ function OnHomeLoaded()
 
   $("#CL-pwd").keyup(UpdateStrength);
   $("#eyeShow").click(pwdShow);
-  $("#save-form").click(function(event) {saveData(event)});
+  $("#save-form").on("submit", () => saveData());
 
   $("#upload").change(function(e) {ImportFile(e);});
 }

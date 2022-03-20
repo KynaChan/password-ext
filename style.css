@@ -97,14 +97,12 @@ body[catlocker]
     justify-content: space-between;
     width: 100%;
     border-radius: 8px;
-    background-color:rgba(250,211,207,1);
+    background-color:rgb(250,211,207);
     box-shadow: 5.6px 5.6px 2.4px rgba(247, 195, 189, 0.897);
     color: rgba(228, 95, 80, 0.788);
     padding: 10px 15px;
     font-size: 20.8px;
     left: -2px;
-    border: 3px white solid;
-
 }
 
 [catlocker] .boxBorder{

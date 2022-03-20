@@ -105,34 +105,47 @@
     font-weight: 630;
     padding-left: 17px;
     word-break:break-all;
-    border: 3px white solid;
+    border: 4px white solid;
 }
+[catlocker] .pwdBox{
+    display: none;
+    border: 4px white solid;
+    border-radius: 0 0 10px 10px;
+    border-top-color: transparent;
+}
+
 /* show selected aaccount pwd */
-[catlocker] .boxColumn:hover .pwd-input-field{
-    display: block;
+[catlocker] .boxColumn:hover .pwdBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 [catlocker] .boxColumn:hover .accountRows{
     margin-top: 6px;
-    border-radius: 11px 11px 0 0;
+    border-radius: 10px 10px 0 0;
     border-bottom-color: transparent;
 }
 
-[catlocker] .pwd-input-field{
-    display: none;
 
-    width: 100%;
-    border: 3px solid white;
-    border-top-color: transparent;
+[catlocker] .dash-input{
+    width: 80%;
 
-    outline: none;
     font-size: 20px;
-    padding: 7px;
-    border-radius: 0 0 11px 11px;
     text-align: center;
+    padding: 7px;
     font-weight: 600;
-    background: rgba(228, 95, 80, 0.4);
+    background: rgba(228, 95, 80, 0.39);
     color: rgb(209, 54, 37);
+    border: none;
+    border-radius: 8px;
 }
+
+
+[catlocker] .dash-input:hover, .dash-input:focus{
+    font-style: italic;
+    outline: none;
+}
+
 
 [catlocker] .boxColumn{
     display: flex;

@@ -43,33 +43,44 @@ function ViewWeb(key)
 
       <div class="inputBox accountRows" remove-${buttonIndex}>
         <div id="accountRow">${id}</div>
-        <span class="material-icons-round" button-remove-${buttonIndex} style="font-weight:bold; font-size: 30px;">remove</span>
       </div>
+    
+      <div class="inputBox pwdBox">
 
-      <div pwd-${buttonIndex}>
-        <input pwd-field-${buttonIndex} id="pwdRow" class="pwd-input-field" type="password" value=${accounts[id]}/>
+        <input pwd-field-${buttonIndex} id="pwdRow" class="pwdBox dash-input" 
+          type="password" value=${accounts[id]} maxlength="0"
+        />
+
       </div>
 
     </div>`;
 
+    let decryptedPwd = decrypt(accounts[id]);
+
     let decryptedRow =`<div class="boxColumn">
 
     <div class="inputBox accountRows" remove-${buttonIndex}>
-      <div id="accountRow">${id}</div>
+      <div class="fa fa-user"></div>
+      <input id="accountRow" class="dash-input" spellcheck=false type="text" value=${id} />
       <span class="material-icons-round" button-remove-${buttonIndex} style="font-weight:bold; font-size: 30px;">remove</span>
     </div>
 
-    <div pwd-${buttonIndex}>
-      <input pwd-field-${buttonIndex} id="pwdRow" class="pwd-input-field" type="text" value=${accounts[id]}/>
+    <div pwd-${buttonIndex} class="inputBox pwdBox">
+      <div class="fa fa-lock"></div>
+      <input pwd-field-${buttonIndex} id="pwdRow" spellcheck=false class="dash-input"
+        type="text" value=${decryptedPwd}
+      />
+      <div></div>
     </div>
 
     </div>`;
 
     if (getWithExpiry('expiry_security_pin'))
     {
-      decrypt(accounts[id]);
       webList.append(decryptedRow);
-    } else {webList.append(row);}
+    } else {
+      webList.append(row);
+    }
 
     let t = id;
     $(`[button-remove-${buttonIndex}]`).click(() => { RemoveUsername(buttonIndex, key, t); });
@@ -189,7 +200,7 @@ function getPin(event)
 
   if ( hashInputPin == existPin )
   {
-    setWithExpiry('expiry_security_pin', hashInputPin, 20000);
+    setWithExpiry('expiry_security_pin', hashInputPin, 60000);
     hidePinForm();
     PopulateWebList();
   }

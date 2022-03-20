@@ -1,4 +1,4 @@
-<form class="save-form">
+<form id="save-form">
   <div id="home" class="content">
 
     <div class="inputBox" id="url-box">
@@ -10,11 +10,11 @@
           spellcheck="false"
           id="url-input"
           type="text"
-        required/>
+        autofocus required/>
         <div class="fa fa-times empty-url"></div>
     </div>
 
-    <div class="inputBox" >
+    <div class="inputBox boxBorder" >
       <div class="fa fa-user"></div>
       <input
         placeholder="User Name"
@@ -25,7 +25,7 @@
       required/>
     </div>
 
-    <div class="inputBox">
+    <div class="inputBox boxBorder">
       <div class="fa fa-lock"></div>
       <input
         placeholder="Password"
@@ -53,7 +53,7 @@
       </label>
     </div>
 
-    <button type="submit" id="save-form" class="saveButton">Save Data</button>
+    <button type="submit" class="saveButton">Save Data</button>
 
 
   </div>
