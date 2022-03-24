@@ -4,7 +4,6 @@
 function PopulateWebList()
 {
   $("#page-title").hide();
-  // $(".currTab").show();
 
   let webList = $("#dashboard-list");
   webList.empty();
@@ -42,13 +41,13 @@ function ViewWeb(key)
     let row =`<div class="boxColumn">
 
       <div class="inputBox accountRows" remove-${buttonIndex}>
-        <div id="accountRow">${id}</div>
+        <div id="accountRow">${buttonIndex+1}. ${id}</div>
       </div>
     
       <div class="inputBox pwdBox">
 
         <input pwd-field-${buttonIndex} id="pwdRow" class="pwdBox dash-input" 
-          type="password" value=${accounts[id]} maxlength="0"
+          type="password" value=${accounts[id]} maxlength="0" minlength="0"
         />
 
       </div>
@@ -70,7 +69,7 @@ function ViewWeb(key)
       <input pwd-field-${buttonIndex} id="pwdRow" spellcheck=false class="dash-input"
         type="text" value=${decryptedPwd}
       />
-      <div></div>
+      <div class="material-icons-round"></div>
     </div>
 
     </div>`;
@@ -115,42 +114,6 @@ function RemoveWeb(key)
 
 
 
-
-// get the current opened tab
-function CurrentTab(url) 
-{
-  var splitCurrURL = url.split("/");
-  $("#tab").text(splitCurrURL[2]);
-  checkMatches(splitCurrURL[2]);
-}
-// check if current tab equals to stored url
-function checkMatches(url)
-{
-  for (var i = 0; i < localStorage.length; i++)
-  {
-    let storeKey = localStorage.key(i);
-    if (url.includes(storeKey))
-    {
-      console.log(url);
-      console.log(i, storeKey);
-      CheckLogin(storeKey);
-    }
-  }
-}
-// check if the current tab is match to a chosen url
-function CheckLogin (url)
-{
-  var pwdInput = $( "input:password");
-  var userInput = $( "input:email") || $( "input[type='text']");
-  var storedUser = (GetAccounts(url));
-
-  console.log("matchhh");
-  // userInput.autocomplete({source: storedUser, autoFocus:true});
-  pwdInput.val(GetAccounts(url).val);
-}
-
-
-
 function ExportData(){
   console.log("hi there, wanna download?")
 
@@ -180,7 +143,6 @@ function hidePinForm()
 {
   $("#dash-Form").hide();
   $("#page-title").show();
-  // PopulateWebList();
 }
 
 function showPinForm(){

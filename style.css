@@ -102,7 +102,7 @@ body[catlocker]
     color: rgba(228, 95, 80, 0.788);
     padding: 10px 15px;
     font-size: 20.8px;
-    left: -2px;
+    /* left: -2px; */
 }
 
 [catlocker] .boxBorder{
@@ -162,11 +162,14 @@ body[catlocker]
     display: flex;
     flex-direction: column;
 
+    border: 3px solid white;
+    border-top: transparent;
+
     gap: 4px;
-    z-index: 99;
-    left: .5%;
+    z-index: 1;
+    left: -2.7px;
     top: 93%;
-    width: 100%;
+    width: 101.5%;
     height: 170px;
 
     box-shadow: 0 9px 8px rgba(194, 138, 133, 0.479);
@@ -254,9 +257,7 @@ body[catlocker]
     padding: 8px 0 0;
     border-radius:  0 0 15px 15px;
 
-    background-color:rgba(247, 195, 189, 0.897);
-    box-shadow: inset 15px 0 30px -5px rgba(250, 154, 141, 0.856);
-
+    background-image: linear-gradient(to bottom right, rgb(248, 209, 205), white);
     font-size: 15px;
     user-select: none;
 }
