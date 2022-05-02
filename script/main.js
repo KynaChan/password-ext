@@ -34,7 +34,6 @@ let DATA = {
 } 
 
 
-
 function GetAccounts(url)
 {
   return JSON.parse(localStorage.getItem(url));

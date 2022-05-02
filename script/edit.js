@@ -25,45 +25,60 @@ function EditUrl()
     $("#go-back-btn").text("");
 
     let id = "page-title-label",
-        currInput = GetCurrInput(id);
+        currInputVal = GetCurrInput(id);
 
     var input = $('<input />', {
         'type': 'text',
         'id': `new-${id}`,
-        'value': currInput,
-        'style': 'width: 250px; margin: 10px; text-align: center;',
+        'value': currInputVal,
+        'style': 'width: 280px; margin: 10px 0; text-align: center;',
         'class': 'CL-input-field',
         'spellcheck': 'false',
-        'original-text': currInput
+        'original-text': currInputVal
     });
 
     $(`#${id}`).replaceWith(input);
     return true;
 }
 
-function SaveNewUrl()
+function UpdateUrl()
 {
     $("#page-key-btn").show();
     $("#page-save-btn").hide();
     $("#go-back-btn").text("arrow_back");
 
-    let id = "page-title-label",
-        newInput = GetNewInput(id);
-        currInput = $(`#new-${id}`).attr('original-text');
-        accounts = GetAccounts(currInput);
+    let titleId = "page-title-label",
+        newInputVal = GetNewInput(titleId),
+        currInputVal = $(`#new-${titleId}`).attr('original-text'),
+        accounts = GetAccounts(currInputVal);
 
-    var label = $(`<label id="${id}" class="${id}">` + newInput + `</label>`);
+    var label = $(`<label id="${titleId}" class="${titleId}">` + newInputVal + `</label>`);
 
-    $(`#new-${id}`).replaceWith(label);
+    $(`#new-${titleId}`).replaceWith(label);
 
-    if(newInput == currInput) { return PopulateWebList(); }
-    localStorage.setItem(newInput, JSON.stringify(accounts));
-    RemoveWeb(currInput);
+    if(newInputVal == currInputVal)
+    { return PopulateWebList(); }
+
+    localStorage.setItem(newInputVal, JSON.stringify(accounts));
+    RemoveWeb(currInputVal);
 }
 
-function CheckEditMode()
+
+function SaveAccountChanges(buttonIndex, webUrl, originalId)
 {
-  if (!EditUrl()) { PopulateWebList(); }
-  SaveNewUrl();
+    let userVal = $(`[account-field-${buttonIndex}]`).val();
+    let pwdVal = $(`[pwd-field-${buttonIndex}]`).val();
+
+    let page = new Page(webUrl);
+    page.SetAccount(userVal, pwdVal);
+    page.SaveToStorage();
+
+    RemoveUsername(buttonIndex, webUrl, originalId);
+}
+
+function ResetAccountChanges(buttonIndex, userVal, decryptedPwd)
+{
+    $(`[account-field-${buttonIndex}]`).val(userVal);
+    $(`[pwd-field-${buttonIndex}]`).val(decryptedPwd);
 }
 

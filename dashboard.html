@@ -9,7 +9,8 @@
 
 <!-- PIN -->
     <form id="dash-Form" class="registerBox">
-        <b style="text-align: center;">Enter your PIN.</b>
+        <b style="text-align: center; ">Enter the PIN to check or edit your accounts.</b>
+        <div style="text-align: center; font-size: 15px; font-weight: 600; margin: 6px 0;">PIN will be expired in 3 minutes.</div>
         <div class="PINBox">
             <label for="pin"> <div class="fas fa-id-card-alt"></div> </label>
             <input placeholder="PIN.."
@@ -52,10 +53,6 @@
     color: rgb(252, 233, 231);
     background-color:rgb(248, 154, 143);
     box-shadow: 4px 5px 5px rgba(247, 195, 189, 0.897);
-    /* display:inline-block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space:nowrap; */
 }
 
 [catlocker] .warning{
@@ -92,13 +89,7 @@
     text-align: center;
     white-space: nowrap;
     text-overflow: ellipsis;
-
-    cursor: pointer;
 }
-[catlocker] .page-title-label:hover{
-    font-style: italic;
-}
-
 
 [catlocker] .accountRows{
     width: 350px;
@@ -111,14 +102,19 @@
     border-radius: 0 0 10px 10px;
     padding-left: 20px;
 }
+[catlocker] .btnDiv{
+    display: none;
+}
 
 /* show selected aaccount pwd */
-[catlocker] .boxColumn:hover .pwdBox{
-    display:block;
+[catlocker] .boxColumn:hover .pwdBox, .boxColumn:hover .btnDiv{
+    display: flex;
 }
 [catlocker] .boxColumn:hover .accountRows{
     margin:-bottom 5px;
     border-radius: 10px 10px 0 0;
+    font-weight: bold;
+
 }
 [catlocker] .boxColumn:hover{
     border: 4px solid white;
@@ -191,11 +187,6 @@
 
 [catlocker] .webBox:hover{
     box-shadow: inset 15px 0 0 -10px rgba(228, 95, 80, 0.61);
-}
-
-[catlocker] .webBox:hover .webRows{
-    border-right: 4px solid white;
-
 }
 
 </style>

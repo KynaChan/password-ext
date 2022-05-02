@@ -114,14 +114,9 @@ function saveData()
   const userVal = user.val().trim();
   const pwdVal =  pwd.val();
 
-  console.log(`The website is: ${urlInputVal}`);
-  console.log(`The userName is: ${userVal}`);
-  console.log(`The password is: ${pwdVal}`);
-
   let page = new Page(urlInputVal);
   page.SetAccount(userVal, pwdVal);
   page.SaveToStorage();
-
 }
 
 
@@ -180,8 +175,6 @@ function SetData(event){
 
 function OnHomeLoaded()
 {
-  console.log("HOME LOADED");
-
   $(".empty-url").click(() => SelectUrl(''));
   $("#url-input").focus(FocusUrlInput);
   $("#url-input").blur(BlurUrlInput);

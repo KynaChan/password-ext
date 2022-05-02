@@ -13,8 +13,6 @@ function userRegister() {
 
 function OnRegisterLoaded()
 {
-
     $("#regForm").on("submit", userRegister);
-    console.log("register LOADED");
 }
 

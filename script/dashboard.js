@@ -13,14 +13,24 @@ function PopulateWebList()
     let storeKey = localStorage.key(i);
     if (storeKey.includes("security_pin") || storeKey.includes("expiry_security_pin")) continue;
 
-    webList.append(`<div class="inputBox webBox boxBorder"><label class="webRows" id="row-${i}">${storeKey}</label>
-      <span class="material-icons-round webRemoveBtn" id="webRemoveBtn-${i}" style="font-size: 30px;">delete_forever</span>
-    </div>`);
+    let withoutPin = `<div class="inputBox webBox boxBorder"><label class="webRows" id="row-${i}">${storeKey}</label></div>`;
+    let withPin = `<div class="inputBox webBox boxBorder"><label class="webRows" id="row-${i}">${storeKey}</label>
+      <span class="material-icons-round webRemoveBtn" id="webRemoveBtn-${i}" style="font-size: 30px; border-left: 4px solid white;">
+      delete_forever</span>
+    </div>`;
+
+    if(getWithExpiry('expiry_security_pin'))
+    { 
+      webList.append(withPin);
+    } else {
+      webList.append(withoutPin);
+    }
 
     $(`#row-${i}`).on("click", () => ViewWeb(storeKey));
     $(`#webRemoveBtn-${i}`).on("click", () => RemoveWeb(storeKey))
   }
 }
+
 
 
 // print stored ac in a selected web
@@ -34,7 +44,7 @@ function ViewWeb(key)
 
   let page = new Page(key);
   let accounts = page.GetAccountsDict();
-  var buttonIndex = 0;
+  let buttonIndex = 0;
 
   for(var id in accounts)
   {
@@ -45,11 +55,9 @@ function ViewWeb(key)
       </div>
     
       <div class="inputBox pwdBox">
-
         <input pwd-field-${buttonIndex} id="pwdRow" class="pwdBox dash-input" 
-          type="password" value=${accounts[id]} maxlength="0" minlength="0"
-        />
-
+          type="password" value=${accounts[id]} readonly
+        >
       </div>
 
     </div>`;
@@ -58,39 +66,62 @@ function ViewWeb(key)
 
     let decryptedRow =`<div class="boxColumn">
 
-    <div class="inputBox accountRows" remove-${buttonIndex}>
+    <div class="inputBox accountRows" account-${buttonIndex}>
       <div class="fa fa-user"></div>
-      <input id="accountRow" class="dash-input" spellcheck=false type="text" value=${id} />
-      <span class="material-icons-round" button-remove-${buttonIndex} style="font-weight:bold; font-size: 30px;">remove</span>
+      <input account-field-${buttonIndex} id="accountRow-${buttonIndex}" class="dash-input" spellcheck=false 
+        type="text" value=${id}
+      >
+      <span class="material-icons-round" button-remove-${buttonIndex} 
+        style="font-weight:bold; font-size: 30px;">remove
+      </span>
     </div>
 
     <div pwd-${buttonIndex} class="inputBox pwdBox">
       <div class="fa fa-lock"></div>
-      <input pwd-field-${buttonIndex} id="pwdRow" spellcheck=false class="dash-input"
+      <input pwd-field-${buttonIndex} id="pwdRow" spellcheck=false class="dash-input" 
         type="text" value=${decryptedPwd}
-      />
-      <div class="material-icons-round"></div>
+      >
+      <div class="material-icons-round" button-copy-${buttonIndex} 
+        style="font-weight:bold; font-size: 25px; transform:scaleX(-1);">copy
+      </div>
+    </div>
+
+    <div class="btnDiv">
+      <button button-reset-${buttonIndex} class="saveButton" id="db-reset-btn" >RESET</button>
+      <button button-save-${buttonIndex} class="saveButton" id="db-save-btn" >SAVE</button>
     </div>
 
     </div>`;
 
+    let userVal = id;
+    let index = buttonIndex;
+
     if (getWithExpiry('expiry_security_pin'))
     {
       webList.append(decryptedRow);
+      EditUrl();
     } else {
       webList.append(row);
     }
 
-    let t = id;
-    $(`[button-remove-${buttonIndex}]`).click(() => { RemoveUsername(buttonIndex, key, t); });
+    $(`[button-save-${buttonIndex}]`).click(() => SaveAccountChanges(index, key, userVal));
+    $(`[button-reset-${buttonIndex}]`).click(() => ResetAccountChanges(index, userVal, decryptedPwd));
+
+    $(`[button-remove-${buttonIndex}]`).click(() => { RemoveUsername(buttonIndex, key, userVal); });
+    $(`[button-copy-${buttonIndex}]`).click(() => { copyStoredPwd(decryptedPwd); });
     buttonIndex++;
   }
 
-  $("#page-title-label").click(() => { EditUrl() });
-
   $("#page-key-btn").click( showPinForm );
-  $("#page-save-btn").click(() => SaveNewUrl());
+  $("#page-save-btn").click(() => UpdateUrl());
   $("#dash-Form").on("submit", function(event) { getPin(event) });
+}
+
+
+function copyStoredPwd(decryptedPwd) 
+{
+  var pwdInput = `${decryptedPwd}`;
+  navigator.clipboard.writeText(pwdInput);
 }
 
 
@@ -100,7 +131,7 @@ function RemoveUsername(buttonIndex, webUrl, id)
   let accounts = GetAccounts(webUrl);
   delete accounts[id];
   SetAccounts(webUrl, accounts);
-  $(`[remove-${buttonIndex}]`).remove();
+  $(`[account-${buttonIndex}]`).remove();
   ViewWeb(webUrl);
 }
 
@@ -108,14 +139,12 @@ function RemoveUsername(buttonIndex, webUrl, id)
 function RemoveWeb(key)
 {
   localStorage.removeItem(key);
-  console.log(key)
   PopulateWebList();
 }
 
 
 
 function ExportData(){
-  console.log("hi there, wanna download?")
 
   var allData = {};
 
@@ -131,8 +160,10 @@ function ExportData(){
 
   var today = new Date();
   let month = today.getMonth()+1;
+
   if (month < 10)
   { month ="0" + month; }
+
   let date = today.getDate();
   SaveFile("CatLocker_backup_"+ month + date + ".json", JSON.stringify(allData) );
 }
@@ -143,11 +174,12 @@ function hidePinForm()
 {
   $("#dash-Form").hide();
   $("#page-title").show();
+  $("#dashboard-list").show();
 }
 
 function showPinForm(){
   $("#dash-Form").show();
-  $("#dashboard-list").empty();
+  $("#dashboard-list").hide();
   $("#page-title").hide();
 }
 
@@ -162,7 +194,7 @@ function getPin(event)
 
   if ( hashInputPin == existPin )
   {
-    setWithExpiry('expiry_security_pin', hashInputPin, 60000);
+    setWithExpiry('expiry_security_pin', hashInputPin, 180000);
     hidePinForm();
     PopulateWebList();
   }
@@ -208,15 +240,15 @@ function OnDashBoardLoaded()
 
   PopulateWebList();
   $("#go-back-btn").click(PopulateWebList);
+  // if (getWithExpiry('expiry_security_pin')) 
+  // {
+  //   $("#go-back-btn").click(SaveNewUrl); 
+  //   PopulateWebList();
+  // }
+
   $("#dash-Form").on("submit", function(event) { getPin(event) });
 
   $("#download").click(ExportData);
-
-  chrome.tabs.getSelected(null, function(tab) {
-    CurrentTab(tab.url);
-  });
-
-  console.log("DASHBOARD LOADED");
 }
 
 

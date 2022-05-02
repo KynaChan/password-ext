@@ -1,16 +1,4 @@
 
-//document.body.style.backgroundColor = "yellow";
-//const newContent = "Hi there and greetings!";
-
-//const { stringify } = require("querystring");
-
-
-// var btn = "<button style='height:300px;width:300px;color:black;z-index:100;'>oerigwirngowirngowr</button>";
-// $("*:password").append(btn);
-//document.body.insertBefore(newDiv, currentDiv);
-
-
-
 function copyPwd() 
 {
     var pwdInput = $("#newPwd").val();
@@ -19,8 +7,6 @@ function copyPwd()
     $.trim(pwdInput);
     navigator.clipboard.writeText(pwdInput);
     copyText.text("COPIED!");
-
-    console.log("COPIED!!");
 }
 
 
@@ -57,9 +43,7 @@ function checkSelection()
         } 
     }
 
-    //var fin = newPwd.slice(0,length);
     return newPwd;
-    //console.log(newPwd);
 }
 
 function generator()
@@ -70,8 +54,7 @@ function generator()
 
     $("#newPwd").val(shufflePwd);
     copyText.text("");
-    copyText.append('<div class="fa fa-copy"></div><b> Copy</b>');
-
+    copyText.append('<b>Copy </b><div class="fa fa-copy" style="transform: scaleX(-1);"></div>');
 }
 
 
@@ -115,9 +98,6 @@ function shuffle(pwd)
 }
 
 
-
-
-
 function OnGeneratorLoaded()
 {
 
@@ -145,6 +125,4 @@ function OnGeneratorLoaded()
     $("#generate").click(generator);
     $("#eyeShow").click(pwdShow);
     $("#copyPwd").click(copyPwd);
-
-    console.log("generator LOADED");
 }

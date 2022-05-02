@@ -4,7 +4,7 @@
     <div class="inputBox boxBorder">
         <input  placeholder="Password" id="newPwd" 
             class="newPwd" type="password" 
-            spellcheck="false" maxlength="0"
+            spellcheck="false" readonly
         />
         <!-- <p id="generatePwd">dddd</p> -->
         <div class="fa fa-eye" id="eyeShow"></div>
@@ -40,7 +40,7 @@
     <div class="btnDiv">
         <button class="saveButton" id="generate" >Generate</button>
         <button class="saveButton" id="copyPwd" >
-            <div class="fa fa-copy"></div><b> Copy</b>
+            <b>Copy </b><div class="fa fa-copy" style="transform: scaleX(-1);"></div>
         </button>
 
     </div>
@@ -208,13 +208,7 @@
 }
 
 
-[catlocker] .btnDiv{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    margin: 5px 0 5px 0;
-    user-select: none;
-}
+
 
 
 [catlocker] .row{
